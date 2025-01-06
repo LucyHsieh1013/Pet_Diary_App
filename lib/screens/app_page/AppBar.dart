@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-AppBar buildAppBar(){
+AppBar buildAppBar(BuildContext context){
   return AppBar(
     // AppBar底線
     bottom: PreferredSize(
@@ -18,6 +18,7 @@ AppBar buildAppBar(){
         icon: Icon(Icons.settings),
         onPressed: () {
           // 設置按鈕點擊事件
+          Navigator.pushNamed(context, '/Setting');
         },
       ),
     ],

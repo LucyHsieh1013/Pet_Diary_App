@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class RegisterScreen extends StatefulWidget {
+class ResetpasswdScreen extends StatefulWidget {
   @override
-  RegisterPage createState() => RegisterPage();
+  Resetpasswd createState() => Resetpasswd();
 }
 
-class RegisterPage extends State<RegisterScreen> {
+class Resetpasswd extends State<ResetpasswdScreen> {
   bool _obscureText = true;
 
   @override
@@ -13,12 +13,13 @@ class RegisterPage extends State<RegisterScreen> {
     return Scaffold(
       body: Center(
         child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 50),        child: Column(
+          padding: const EdgeInsets.symmetric(horizontal: 50),        
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
                 child: Text(
-                  '註冊帳號',
+                  '重設密碼',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 30,
@@ -27,24 +28,9 @@ class RegisterPage extends State<RegisterScreen> {
               ),
               Container(
                 child: Text(
-                  '註冊一個新帳號',
+                  '輸入您的新密碼',
                   style: TextStyle(
                     color: Colors.grey,
-                  ),
-                ),
-              ),
-              SizedBox(height: 10),
-              Container(
-                width: 300,
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'example@gmail.com',
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30)
-                    ),
                   ),
                 ),
               ),
@@ -99,36 +85,22 @@ class RegisterPage extends State<RegisterScreen> {
                   ),
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Container(
-                    child: Text('已有帳號? '),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      '前往登入',
-                      style: TextStyle(
-                        color: Color.fromRGBO(255, 30, 84, 1),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              
               SizedBox(height: 10),
               SizedBox(
                 width: 300,
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    side: const BorderSide(
+                      color: Color.fromARGB(255, 213, 213, 213)
+                    ),
+                    shadowColor: Colors.grey
+                  ),
                   onPressed: () {
-                    // 處理按鈕事件
+                    Navigator.pushNamed(context, '/');
                     print('按下按鈕');
                   },
                   child: Text(
-                    '註冊',
+                    '確定',
                     style: TextStyle(
                       color: Colors.red,
                     ),

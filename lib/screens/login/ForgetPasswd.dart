@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class VerificationScreen extends StatefulWidget {
+class ForgetpasswdScreen extends StatefulWidget {
   @override
-  Verification createState() => Verification();
+  Forgetpasswd createState() => Forgetpasswd();
 }
 
-class Verification extends State<VerificationScreen> {
+class Forgetpasswd extends State<ForgetpasswdScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +17,7 @@ class Verification extends State<VerificationScreen> {
             children: <Widget>[
               Container(
                 child: Text(
-                  '驗證',
+                  '忘記密碼',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 30,
@@ -26,7 +26,7 @@ class Verification extends State<VerificationScreen> {
               ),
               Container(
                 child: Text(
-                  '輸入您的驗證碼',
+                  '輸入您的Email',
                   style: TextStyle(
                     color: Colors.grey,
                   ),
@@ -37,7 +37,7 @@ class Verification extends State<VerificationScreen> {
                 width: 300,
                 child: TextField(
                   decoration: InputDecoration(
-                    hintText: '六位數驗證碼',
+                    hintText: 'example@gmail.com',
                     hintStyle: TextStyle(
                       color: Colors.grey,
                     ),
@@ -51,12 +51,18 @@ class Verification extends State<VerificationScreen> {
               SizedBox(
                 width: 300,
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    side: const BorderSide(
+                      color: Color.fromARGB(255, 213, 213, 213)
+                    ),
+                    shadowColor: Colors.grey
+                  ),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/Resetpasswd');
+                    Navigator.pushNamed(context, '/Verification');
                     print('按下按鈕');
                   },
                   child: Text(
-                    '驗證',
+                    '獲得驗證碼',
                     style: TextStyle(
                       color: Colors.red,
                     ),

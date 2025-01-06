@@ -13,8 +13,8 @@ class LodinPage extends State<LoginScreen> {
     return Scaffold(
       body: Center(
         child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 50),
-            child: Column(
+          padding: const EdgeInsets.symmetric(horizontal: 50),
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
@@ -96,6 +96,12 @@ class LodinPage extends State<LoginScreen> {
               SizedBox(
                 width: 300,
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    side: const BorderSide(
+                      color: Color.fromARGB(255, 213, 213, 213)
+                    ),
+                    shadowColor: Colors.grey
+                  ),
                   onPressed: () {
                     Navigator.pushNamed(context, '/home');
                   },
@@ -105,6 +111,12 @@ class LodinPage extends State<LoginScreen> {
               SizedBox(
                 width: 300,
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    side: const BorderSide(
+                      color: Color.fromARGB(255, 213, 213, 213)
+                    ),
+                    shadowColor: Colors.grey
+                  ),
                   onPressed: () {
                     Navigator.pushNamed(context, '/register');
                   },

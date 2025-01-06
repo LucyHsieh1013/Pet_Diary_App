@@ -25,7 +25,7 @@ class _NavController extends State<NavController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(),// AppBar.dart
+      appBar: buildAppBar(context),// AppBar.dart
       body: pages[_currentIndex], // 根據當前索引顯示對應的頁面
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex, // 當前選中的索引

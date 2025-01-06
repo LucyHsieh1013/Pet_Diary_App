@@ -5,7 +5,7 @@ import 'package:test_app/all_page/login_page/LoginPage.dart';
 import 'package:test_app/all_page/login_page/Forgetpasswd.dart';
 import 'package:test_app/all_page/login_page/VerificationPage.dart';
 import 'package:test_app/all_page/login_page/ResetPasswd.dart';
-
+import 'package:test_app/all_page/app_page/SettingPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,11 +24,8 @@ class MyApp extends StatelessWidget {
         '/forgetpasswd': (context) => ForgetpasswdScreen(),
         '/Verification': (context) => VerificationScreen(),
         '/Resetpasswd': (context) => ResetpasswdScreen(),
-
+        '/Setting': (context) => SettingPage(),
       },
-      // home: Scaffold(
-      //   body: NavController(),
-      // )
     );
   }
 }
