@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_app/screens/component/defaultButton.dart';
 
 class PetPage extends StatelessWidget {
   @override
@@ -24,11 +25,12 @@ class PetPage extends StatelessWidget {
             ),
           ),
           SizedBox(height: 20),
-          ElevatedButton(
+          CustomButton(
+            text: '+註冊寵物',
+            width: 120,
             onPressed: () {
-              // 註冊寵物按鈕點擊事件
+              Navigator.pushNamed(context, '/Addform');
             },
-            child: Text('+註冊寵物'),
           ),
         ],
       ),

@@ -17,7 +17,6 @@ AppBar buildAppBar(BuildContext context){
       IconButton(
         icon: Icon(Icons.settings),
         onPressed: () {
-          // 設置按鈕點擊事件
           Navigator.pushNamed(context, '/Setting');
         },
       ),

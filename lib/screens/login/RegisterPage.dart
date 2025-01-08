@@ -13,7 +13,8 @@ class RegisterPage extends State<RegisterScreen> {
     return Scaffold(
       body: Center(
         child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 50),        child: Column(
+          padding: const EdgeInsets.symmetric(horizontal: 50),        
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(

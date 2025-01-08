@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:test_app/all_page/app_page/ChartPage.dart';
-import 'package:test_app/all_page/app_page/DiaryPage.dart';
-import 'package:test_app/all_page/app_page/CalendarPage.dart';
-import 'package:test_app/all_page/app_page/ExplorePage.dart';
-import 'package:test_app/all_page/app_page/PetPage.dart';
-import 'package:test_app/all_page/app_page/AppBar.dart';
+import 'package:test_app/screens/app_page/ChartPage.dart';
+import 'package:test_app/screens/app_page/DiaryPage.dart';
+import 'package:test_app/screens/app_page/CalendarPage.dart';
+import 'package:test_app/screens/app_page/ExplorePage.dart';
+import 'package:test_app/screens/app_page/PetPage.dart';
+import 'package:test_app/screens/app_page/AppBar.dart';
 
 class NavController extends StatefulWidget {
   @override

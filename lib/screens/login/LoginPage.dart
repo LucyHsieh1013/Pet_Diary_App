@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:test_app/screens/component/defaultTextField.dart';
+import 'package:test_app/screens/component/defaultButton.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -35,45 +37,29 @@ class LodinPage extends State<LoginScreen> {
                 ),
               ),
               SizedBox(height: 10),
-              Container(
-                width: 300,
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'example@gmail.com',
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30)
-                    ),
-                  ),
-                ),
+
+              //Email輸入框
+              CustomTextField(
+                hintText: 'example@gmail.com',
+                haveborder: true,
               ),
               SizedBox(height: 10),
-              Container(
-                width: 300,
-                child: TextField(
-                  obscureText: _obscureText,
-                  decoration: InputDecoration(
-                    hintText: '6~8位數密碼',
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30)
-                    ),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscureText ? Icons.visibility_off : Icons.visibility,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _obscureText = !_obscureText;
-                        });
-                      },
-                    )
+              
+              //密碼輸入框
+              CustomTextField(
+                hintText: '6~8位數密碼',
+                haveborder: true,
+                obscureText: _obscureText,
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _obscureText ? Icons.visibility_off : Icons.visibility,
                   ),
-                ),
+                  onPressed: () {
+                    setState(() {
+                      _obscureText = !_obscureText;
+                    });
+                  },
+                )
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -93,41 +79,19 @@ class LodinPage extends State<LoginScreen> {
               ),
               
               SizedBox(height: 10),
-              SizedBox(
-                width: 300,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    side: const BorderSide(
-                      color: Color.fromARGB(255, 213, 213, 213)
-                    ),
-                    shadowColor: Colors.grey
-                  ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/home');
-                  },
-                  child: Text('登入'),
-                ),
+              //登入按鈕
+              CustomButton(
+                text: '登入',
+                onPressed: () {
+                  Navigator.pushNamed(context, '/home');
+                },
               ),
-              SizedBox(
-                width: 300,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    side: const BorderSide(
-                      color: Color.fromARGB(255, 213, 213, 213)
-                    ),
-                    shadowColor: Colors.grey
-                  ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/register');
-                  },
-                  child: Text(
-                    '註冊帳號',
-                    style: TextStyle(
-                      color: Colors.red,
-                    ),
-                  ),
-                  
-                ),
+              //註冊按鈕
+              CustomButton(
+                text: '註冊帳號',
+                onPressed: () {
+                  Navigator.pushNamed(context, '/register');
+                },
               ),
               SizedBox(height: 32),
               Row(
