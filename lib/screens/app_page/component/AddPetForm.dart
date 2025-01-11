@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:test_app/screens/component/defaultTextField.dart';
 import 'package:test_app/screens/app_page/component/PetImg.dart';
 import 'package:test_app/screens/component/defaultButton.dart';
+import 'package:test_app/screens/component/defaultContainer.dart';
 
-class AddForm extends StatefulWidget {
+
+class AddPetForm extends StatefulWidget {
   // const AddForm({super.key});
 
   @override
-  State<AddForm> createState() => AddFormState();
+  State<AddPetForm> createState() => AddPetFormState();
 }
 
-class AddFormState extends State<AddForm> {
+class AddPetFormState extends State<AddPetForm> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ScrollableScaffold(
       appBar: AppBar(
         title: Text(
           '新增寵物資訊',
@@ -23,6 +25,13 @@ class AddFormState extends State<AddForm> {
           ),
         ),
         centerTitle: true,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(10.0),
+          child: Container(
+            height: 1.0,
+            color: Colors.grey.withOpacity(0.5),
+          ),
+        )
       ),
       body: Padding(
         padding: const EdgeInsets.all(30),
@@ -43,12 +52,12 @@ class AddFormState extends State<AddForm> {
               text: '確定',
               width: 120,
               onPressed: () {
-                // Navigator.pushNamed(context, '/Addform');
+                Navigator.pushNamed(context, '/Pet');
               },
             ),
           ],
         ),
-      ),
+      )
     );
   }
 }

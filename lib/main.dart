@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:test_app/screens/app_page/NavController.dart';
 import 'package:test_app/screens/login/RegisterPage.dart';
 import 'package:test_app/screens/login/LoginPage.dart';
 import 'package:test_app/screens/login/Forgetpasswd.dart';
 import 'package:test_app/screens/login/VerificationPage.dart';
 import 'package:test_app/screens/login/ResetPasswd.dart';
+
+import 'package:test_app/screens/app_page/NavController.dart';
 import 'package:test_app/screens/app_page/SettingPage.dart';
-import 'package:test_app/screens/app_page/component/AddPet.dart';
+import 'package:test_app/screens/app_page/component/AddPetForm.dart';
+import 'package:test_app/screens/app_page/PetPage.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -26,7 +29,8 @@ class MyApp extends StatelessWidget {
         '/Verification': (context) => VerificationScreen(),
         '/Resetpasswd': (context) => ResetpasswdScreen(),
         '/Setting': (context) => SettingPage(),
-        '/Addform': (context) => AddForm(),
+        '/Addform': (context) => AddPetForm(),
+        '/Pet': (context) => PetPage(),
 
       },
     );

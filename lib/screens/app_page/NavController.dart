@@ -3,8 +3,10 @@ import 'package:test_app/screens/app_page/ChartPage.dart';
 import 'package:test_app/screens/app_page/DiaryPage.dart';
 import 'package:test_app/screens/app_page/CalendarPage.dart';
 import 'package:test_app/screens/app_page/ExplorePage.dart';
-import 'package:test_app/screens/app_page/PetPage.dart';
+// import 'package:test_app/screens/app_page/AddPetPage.dart';
 import 'package:test_app/screens/app_page/AppBar.dart';
+
+import 'package:test_app/screens/app_page/PetPage.dart';
 
 class NavController extends StatefulWidget {
   @override
@@ -15,7 +17,8 @@ class _NavController extends State<NavController> {
   int _currentIndex = 0; // 當前選中的頁面索引
 
   final pages = [
-    PetPage(),// PetPage.dart
+    // AddPetPage(),// PetPage.dart
+    PetPage(),//註冊寵物以後的頁面
     ChartPage(), // ChartPage.dart
     DiaryPage(), // DiaryPage.dart
     CalendarPage(), // CalendarPage.dart
