@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:test_app/screens/component/Validate.dart';
+import 'package:test_app/screens/component/defaultTextField.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -7,7 +9,37 @@ class RegisterScreen extends StatefulWidget {
 
 class RegisterPage extends State<RegisterScreen> {
   bool _obscureText = true;
+  final Map<String, String> formData = {
+    'email': '',
+    'password': '',
+    'confirmPassword': '',
+  };
+  String? emailError;
+  String? passwordError;
+  String? confirmPassword;
 
+  void formSubmit(){
+    final emailErr = Validate.validateEmail(formData['email']);
+    final passwordErr = Validate.validatePassword(formData['password']);
+    final confirmErr = Validate.confirmPassword(formData['password'],formData['confirmPassword']);
+
+    setState(() {
+      emailError = emailErr;
+      passwordError = passwordErr;
+      confirmPassword = confirmErr;
+    });
+
+    if(emailError == null && passwordError == null && confirmErr == null){
+      print('提交的資料: $formData');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('註冊成功'))
+      );
+      Navigator.pop(context);
+    }else{
+      print('error');
+    }
+    
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,70 +67,59 @@ class RegisterPage extends State<RegisterScreen> {
                 ),
               ),
               SizedBox(height: 10),
-              Container(
-                width: 300,
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'example@gmail.com',
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30)
-                    ),
-                  ),
-                ),
+              CustomTextField(
+                hintText: 'example@gmail.com',
+                onChanged: (value){
+                  setState(() {
+                    formData['email'] = value;
+                  });
+                },
+                haveborder: true,
+                errorText: emailError,
               ),
               SizedBox(height: 10),
-              Container(
-                width: 300,
-                child: TextField(
-                  obscureText: _obscureText,
-                  decoration: InputDecoration(
-                    hintText: '6~8位數密碼',
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30)
-                    ),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscureText ? Icons.visibility_off : Icons.visibility,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _obscureText = !_obscureText;
-                        });
-                      },
-                    )
+              CustomTextField(
+                hintText: '6~8位數密碼',
+                obscureText: _obscureText,
+                onChanged: (value){
+                  setState(() {
+                    formData['password'] = value;
+                  });
+                },
+                haveborder: true,
+                errorText: passwordError,
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _obscureText ? Icons.visibility_off : Icons.visibility,
                   ),
-                ),
-              ),SizedBox(height: 10),
-              Container(
-                width: 300,
-                child: TextField(
-                  obscureText: _obscureText,
-                  decoration: InputDecoration(
-                    hintText: '再次輸入密碼',
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30)
-                    ),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscureText ? Icons.visibility_off : Icons.visibility,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _obscureText = !_obscureText;
-                        });
-                      },
-                    )
+                  onPressed: () {
+                    setState(() {
+                      _obscureText = !_obscureText;
+                    });
+                  },
+                )
+              ),
+              SizedBox(height: 10),
+              CustomTextField(
+                hintText: '6~8位數密碼',
+                obscureText: _obscureText,
+                onChanged: (value){
+                  setState(() {
+                    formData['confirmPassword'] = value;
+                  });
+                },
+                haveborder: true,
+                errorText: confirmPassword,
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _obscureText ? Icons.visibility_off : Icons.visibility,
                   ),
-                ),
+                  onPressed: () {
+                    setState(() {
+                      _obscureText = !_obscureText;
+                    });
+                  },
+                )
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -130,10 +151,7 @@ class RegisterPage extends State<RegisterScreen> {
                     ),
                     shadowColor: Colors.grey
                   ),
-                  onPressed: () {
-                    // 處理按鈕事件
-                    print('按下按鈕');
-                  },
+                  onPressed: formSubmit,
                   child: Text(
                     '註冊',
                     style: TextStyle(
