@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/screens/component/Validate.dart';
 import 'package:test_app/screens/component/defaultTextField.dart';
+import 'package:test_app/screens/component/defaultButton.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -9,28 +10,21 @@ class RegisterScreen extends StatefulWidget {
 
 class RegisterPage extends State<RegisterScreen> {
   bool _obscureText = true;
-  final Map<String, String> formData = {
-    'email': '',
-    'password': '',
-    'confirmPassword': '',
-  };
+  String email = '';
+  String password = '';
+  String confirmPassword = '';
+
   String? emailError;
   String? passwordError;
-  String? confirmPassword;
+  String? confirmPasswordError;
 
   void formSubmit(){
-    final emailErr = Validate.validateEmail(formData['email']);
-    final passwordErr = Validate.validatePassword(formData['password']);
-    final confirmErr = Validate.confirmPassword(formData['password'],formData['confirmPassword']);
+    validateEmail(email);
+    validatePassword(password);
+    validateConfirmPasswordOnSubmit();
 
-    setState(() {
-      emailError = emailErr;
-      passwordError = passwordErr;
-      confirmPassword = confirmErr;
-    });
-
-    if(emailError == null && passwordError == null && confirmErr == null){
-      print('提交的資料: $formData');
+    if(emailError == null && passwordError == null && confirmPasswordError == null){
+      print('提交的資料: email=$email, password=$password');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('註冊成功'))
       );
@@ -39,6 +33,21 @@ class RegisterPage extends State<RegisterScreen> {
       print('error');
     }
     
+  }
+  void validateEmail(String value) {
+    setState(() {
+      emailError = Validate.validateEmail(value);
+    });
+  }
+  void validatePassword(String value) {
+    setState(() {
+      passwordError = Validate.validatePassword(value);
+    });
+  }
+  void validateConfirmPasswordOnSubmit() {
+    setState(() {
+      confirmPasswordError = Validate.confirmPassword(password, confirmPassword);
+    });
   }
   @override
   Widget build(BuildContext context) {
@@ -71,7 +80,8 @@ class RegisterPage extends State<RegisterScreen> {
                 hintText: 'example@gmail.com',
                 onChanged: (value){
                   setState(() {
-                    formData['email'] = value;
+                    email = value;
+                    validateEmail(value);
                   });
                 },
                 haveborder: true,
@@ -83,7 +93,8 @@ class RegisterPage extends State<RegisterScreen> {
                 obscureText: _obscureText,
                 onChanged: (value){
                   setState(() {
-                    formData['password'] = value;
+                    password = value;
+                    validatePassword(value);
                   });
                 },
                 haveborder: true,
@@ -105,11 +116,11 @@ class RegisterPage extends State<RegisterScreen> {
                 obscureText: _obscureText,
                 onChanged: (value){
                   setState(() {
-                    formData['confirmPassword'] = value;
+                    confirmPassword = value;
                   });
                 },
                 haveborder: true,
-                errorText: confirmPassword,
+                errorText: confirmPasswordError,
                 suffixIcon: IconButton(
                   icon: Icon(
                     _obscureText ? Icons.visibility_off : Icons.visibility,
@@ -142,24 +153,9 @@ class RegisterPage extends State<RegisterScreen> {
               ),
               
               SizedBox(height: 10),
-              SizedBox(
-                width: 300,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    side: const BorderSide(
-                      color: Color.fromARGB(255, 213, 213, 213)
-                    ),
-                    shadowColor: Colors.grey
-                  ),
-                  onPressed: formSubmit,
-                  child: Text(
-                    '註冊',
-                    style: TextStyle(
-                      color: Colors.red,
-                    ),
-                  ),
-                  
-                ),
+              CustomButton(
+                text: '註冊',
+                onPressed: formSubmit,
               ),
             ]
           ),

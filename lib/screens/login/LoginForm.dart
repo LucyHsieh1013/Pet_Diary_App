@@ -20,6 +20,9 @@ class LoginFormState extends State<LoginForm> {
 
   //提交表單
   void formSubmit(){
+    validateEmail(email);
+    validatePassword(password);
+
     print('提交的資料: $email, $password');
     if(formkey.currentState!.validate()){
       final error = loginValidate.login(email, password);

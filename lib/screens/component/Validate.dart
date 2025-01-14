@@ -11,7 +11,7 @@ class Validate{
     }
     final emailRegex = RegExp(r'^[^@]+@[^@]+.[^@]');
     if(!emailRegex.hasMatch(value)){
-      return '請輸入有效的Email';
+      return '請輸入正確格式的Email';
     }
     return null;
   }
