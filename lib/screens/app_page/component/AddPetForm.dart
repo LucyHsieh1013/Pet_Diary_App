@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:test_app/screens/component/defaultTextField.dart';
+import 'package:test_app/screens/component/defaultTextField.dart';
 import 'package:test_app/screens/app_page/component/PetImg.dart';
 import 'package:test_app/screens/component/defaultButton.dart';
 import 'package:test_app/screens/component/defaultContainer.dart';
@@ -16,6 +16,7 @@ class AddPetFormState extends State<AddPetForm> {
   @override
   Widget build(BuildContext context) {
     return ScrollableScaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
           '新增寵物資訊',
@@ -38,15 +39,15 @@ class AddPetFormState extends State<AddPetForm> {
         child: Column(
           children: [
             PetImage(imgUrl: '', Iconbutton: true,),//''填圖片路徑，預設為icon
-            // CustomTextField(hintText: '寵物名字'),
-            // SizedBox(height: 20),
-            // CustomTextField(hintText: '品種'),
-            // SizedBox(height: 20),
-            // CustomTextField(hintText: '性別'),
-            // SizedBox(height: 20),
-            // CustomTextField(hintText: '生日'),
-            // SizedBox(height: 20),
-            // CustomTextField(hintText: '迎接家庭的日期'),
+            CustomTextField(hintText: '寵物名字', onChanged: (context){},),
+            SizedBox(height: 20),
+            CustomTextField(hintText: '品種', onChanged: (context){},),
+            SizedBox(height: 20),
+            CustomTextField(hintText: '性別', onChanged: (context){},),
+            SizedBox(height: 20),
+            CustomTextField(hintText: '生日', onChanged: (context){},),
+            SizedBox(height: 20),
+            CustomTextField(hintText: '迎接家庭的日期', onChanged: (context){},),
             SizedBox(height: 20),
             CustomButton(
               text: '確定',

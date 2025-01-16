@@ -36,32 +36,47 @@ class ScrollableScaffold  extends StatelessWidget {
   final Widget? appBar;
   final Widget body;
   final Widget? floatingActionButton;
+  final double borderRadius;
+  final Color backgroundColor;
+
 
   const ScrollableScaffold ({
     Key? key,
     this.appBar,
     required this.body,
     this.floatingActionButton,
+    this.borderRadius = 0,
+    this.backgroundColor = Colors.white
   }):super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBar != null
-        ?PreferredSize(
-          preferredSize: Size.fromHeight(50),
-          child: appBar!,
-        )
-        : null,
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: body,
+    return ClipRRect(
+      borderRadius: BorderRadius.all(
+        Radius.circular(borderRadius), // 設置頂部圓角
+      ),
+    
+      child: Scaffold(
+        backgroundColor: backgroundColor,
+        appBar: appBar != null
+          ?PreferredSize(
+            preferredSize: Size.fromHeight(50),
+            child: appBar!,
+          )
+          : null,
+          body: SingleChildScrollView(
+            child: IntrinsicHeight(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: body,
+              ),
+            ),
           ),
-        ),
-        floatingActionButton: floatingActionButton != null
-          ?floatingActionButton
-          :null,
+          
+          floatingActionButton: floatingActionButton != null
+            ?floatingActionButton
+            :null,
+      )
     );
   }
 }
