@@ -16,7 +16,6 @@ class AddPetFormState extends State<AddPetForm> {
   @override
   Widget build(BuildContext context) {
     return ScrollableScaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
           '新增寵物資訊',

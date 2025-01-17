@@ -37,7 +37,7 @@ class ScrollableScaffold  extends StatelessWidget {
   final Widget body;
   final Widget? floatingActionButton;
   final double borderRadius;
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
 
   const ScrollableScaffold ({
@@ -46,7 +46,7 @@ class ScrollableScaffold  extends StatelessWidget {
     required this.body,
     this.floatingActionButton,
     this.borderRadius = 0,
-    this.backgroundColor = Colors.white
+    this.backgroundColor,
   }):super(key: key);
 
   @override
