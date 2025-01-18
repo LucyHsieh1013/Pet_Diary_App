@@ -4,13 +4,26 @@ import 'package:test_app/screens/component/defaultButton.dart';
 // import 'package:test_app/screens/component/defaultContainer.dart';
 // import 'package:test_app/screens/component/Validate.dart';
 import 'package:test_app/screens/login/LoginForm.dart';
+import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatefulWidget {
   @override
   LodinPage createState() => LodinPage();
 }
 class LodinPage extends State<LoginScreen> {
-
+  Future<void> connectToNode() async {
+    try {
+      // 使用適合模擬器的地址
+      final response = await http.get(Uri.parse('http://localhost:3000'));
+      if (response.statusCode == 200) {
+        print('Response from Node.js: ${response.body}');
+      } else {
+        print('Failed to connect: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error connecting to Node.js: $e');
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

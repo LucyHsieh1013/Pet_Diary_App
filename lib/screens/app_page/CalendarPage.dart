@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
-// import 'package:test_app/screens/component/defaultContainer.dart';
 import 'package:intl/intl.dart';
 class Event {
   final String title;
@@ -20,7 +19,7 @@ class CalendarPageState extends State<CalendarPage> {
   DateTime _selectedDay = DateTime.now();
   DateTime _focusedDay = DateTime.now();
 
-  //事件列表
+  //事件列表(測試用)
   final Map<DateTime, List<Event>> events = {
     DateTime.utc(2025, 01, 17):[Event('Meeting with client')],
     DateTime.utc(2025, 01, 20):[Event('Project deadline')],
@@ -28,12 +27,6 @@ class CalendarPageState extends State<CalendarPage> {
   
   List<Event> _getEventsForDay(DateTime day){
     final normalizedDay = DateTime.utc(day.year, day.month, day.day);
-    print("Checking events for day (UTC): $normalizedDay");
-
-    print("所有事件日期: ${events.keys.map((e) => e.toUtc())}");
-    for (var key in events.keys) {
-      print("鍵: $key, 是否匹配: ${key == normalizedDay}");
-    }
     return events[normalizedDay] ?? [];
   } 
 
@@ -60,8 +53,6 @@ class CalendarPageState extends State<CalendarPage> {
                   _selectedDay = selectedDay;
                   _focusedDay = focusedDay;
                 });
-                print("選中的日期: $selectedDay");
-                print("對應的事件: ${_getEventsForDay(selectedDay)}");
               },
               eventLoader: _getEventsForDay,
               calendarBuilders: CalendarBuilders(
@@ -82,11 +73,11 @@ class CalendarPageState extends State<CalendarPage> {
             ),
           )
         ),
-        
+        //顯示事件
         Expanded(
           child: _getEventsForDay(_selectedDay).isEmpty
             ? const Center(child: Text('沒有事件'))
-            :ListView(
+            :ListView(//可滾動widget
               children: _getEventsForDay(_selectedDay)
               .map((event) => ListTile(
                 title: Text(event.title),

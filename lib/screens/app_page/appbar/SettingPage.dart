@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:test_app/screens/component/defaultContainer.dart';
 
 class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ScrollableScaffold(
       appBar: AppBar(
         title: Text('設定'),
         centerTitle: true,
@@ -22,6 +23,14 @@ class SettingPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
+            ListTile(
+              leading:  Icon(Icons.article),
+              title: Text('修改密碼'),
+              onTap: (){
+                //
+              },
+            ),
+            Divider(),
             ListTile(
               leading:  Icon(Icons.article),
               title: Text('主題'),

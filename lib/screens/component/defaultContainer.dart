@@ -65,12 +65,10 @@ class ScrollableScaffold  extends StatelessWidget {
           )
           : null,
           body: SingleChildScrollView(
-            child: IntrinsicHeight(
-              child: Padding(
+            child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: body,
-              ),
-            ),
+            )
           ),
           
           floatingActionButton: floatingActionButton != null
