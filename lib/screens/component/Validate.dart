@@ -1,9 +1,9 @@
-//註冊驗證
+//驗證
 class Validate{
   //測試帳號
-  final Map<String, String> users = {
-    'test': '123456',
-  };
+  // final Map<String, String> users = {
+  //   'test': '123456',
+  // };
   
   static String? validateEmail(String? value){
     if(value == null || value.isEmpty){
@@ -33,23 +33,22 @@ class Validate{
     }
     return null;
   }
-
-  String? login(String? email, String? password){
-    if(email == null || email.isEmpty){
-      return '請輸入Email';
-    }
-    if(password == null || password.isEmpty){
-      return '請輸入密碼';
-    }
-    if(!users.containsKey(email)){
-      return '帳號不存在';
-    }
-    if(users[email] != password){
-      return '密碼錯誤';
-    }
-    return null;
-  }
 }
+// String? login(String? email, String? password){
+//   if(email == null || email.isEmpty){
+//     return '請輸入Email';
+//   }
+//   if(password == null || password.isEmpty){
+//     return '請輸入密碼';
+//   }
+//   if(!users.containsKey(email)){
+//     return '帳號不存在';
+//   }
+//   if(users[email] != password){
+//     return '密碼錯誤';
+//   }
+//   return null;
+// }
 
 //登入驗證
 // class LoginValidate {

@@ -7,6 +7,8 @@ class CustomTextField extends StatelessWidget {
   final bool obscureText; //是否隱藏文字
   final Function(String) onChanged;
   final String? errorText;
+  final String? Function(String?)? validator; // 驗證函式
+  final TextEditingController? controller;
 
   const CustomTextField({
     Key? key,
@@ -16,12 +18,14 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     required this.onChanged,
     this.errorText,
+    this.validator,
+    this.controller,
   }) :super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: TextField(
+      child: TextFormField(
         obscureText: obscureText,
         decoration: InputDecoration(
           hintText: hintText,
@@ -39,6 +43,7 @@ class CustomTextField extends StatelessWidget {
         onChanged: (value) {
           onChanged(value);
         },
+        validator: validator,
       ),
     );
   }
