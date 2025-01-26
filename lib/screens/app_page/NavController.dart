@@ -5,6 +5,7 @@ import 'package:test_app/screens/app_page/CalendarPage.dart';
 import 'package:test_app/screens/app_page/ExplorePage.dart';
 import 'package:test_app/screens/app_page/pet/AddPetPage.dart';
 import 'package:test_app/screens/app_page/appbar/AppBar.dart';
+import 'package:test_app/screens/app_page/appbar/SettingPage.dart';
 
 // import 'package:test_app/screens/app_page/pet/PetPage.dart';
 
@@ -29,6 +30,7 @@ class _NavController extends State<NavController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context),// AppBar.dart
+      endDrawer: SettingDrawer(context),
       body: pages[_currentIndex], // 根據當前索引顯示對應的頁面
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex, // 當前選中的索引

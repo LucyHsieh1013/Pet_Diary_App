@@ -26,7 +26,7 @@ class RegisterPage extends State<RegisterScreen> {
     if(formkey.currentState!.validate()){
       try{
         final response = await http.post(
-          Uri.parse('http://10.0.2.2:3000/rigister'),
+          Uri.parse('http://10.0.2.2:3000/register'),
           headers: {'Content-Type':'application/json'},
           body: json.encode({
             'email': email,

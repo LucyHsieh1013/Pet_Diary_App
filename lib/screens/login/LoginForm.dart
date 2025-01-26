@@ -4,6 +4,8 @@ import 'package:test_app/screens/component/defaultButton.dart';
 import 'package:test_app/screens/component/Validate.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+
 class LoginForm extends StatefulWidget {
   @override
   State<LoginForm> createState() => LoginFormState();
@@ -23,8 +25,11 @@ class LoginFormState extends State<LoginForm> {
   String? passwordError;
 
   //後端帳密驗證
-  Future<void> formSubmit() async{
+  Future<void> formSubmit(BuildContext context) async{
     if(formkey.currentState!.validate()){
+      final progress = ProgressHUD.of(context);
+      progress?.showWithText('Loading...');
+
       try{
         final response = await http.post(
           Uri.parse('http://10.0.2.2:3000/login'),
@@ -39,6 +44,7 @@ class LoginFormState extends State<LoginForm> {
         print('Response body: ${response.body}');
 
         final data = json.decode(response.body);
+        progress?.dismiss();
 
         if(response.statusCode == 200 ){
           ScaffoldMessenger.of(context).showSnackBar(
@@ -51,6 +57,7 @@ class LoginFormState extends State<LoginForm> {
           );
         }
       }catch (e) {
+        progress?.dismiss();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('發生錯誤: $e')),
         );
@@ -117,7 +124,13 @@ class LoginFormState extends State<LoginForm> {
           //登入按鈕
           CustomButton(
             text: '登入',
-            onPressed: formSubmit,
+            onPressed: (){
+              final progress = ProgressHUD.of(context);
+              progress?.showWithText('Loading...');
+              formSubmit(context).then((_) {
+                progress?.dismiss();
+              });
+            }
           ),
         ],
       )

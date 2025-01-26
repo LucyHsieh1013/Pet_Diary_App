@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// import 'package:test_app/screens/app_page/appbar/SettingPage.dart';
 
 AppBar buildAppBar(BuildContext context){
   return AppBar(
@@ -14,10 +15,15 @@ AppBar buildAppBar(BuildContext context){
     title: Text('使用者'),
     centerTitle: true,// title至中
     actions: [
-      IconButton(
-        icon: Icon(Icons.settings),
-        onPressed: () {
-          Navigator.pushNamed(context, '/Setting');
+      Builder(
+        builder: (BuildContext context) {
+          return IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () {
+              // 使用 Builder 小部件包裹 context，以便正確訪問 Scaffold
+              Scaffold.of(context).openEndDrawer();
+            },
+          );
         },
       ),
     ],
