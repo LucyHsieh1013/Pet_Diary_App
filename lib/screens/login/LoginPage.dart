@@ -1,29 +1,25 @@
 import 'package:flutter/material.dart';
-// import 'package:test_app/screens/component/defaultTextField.dart';
+import 'package:test_app/screens/component/defaultTextField.dart';
 import 'package:test_app/screens/component/defaultButton.dart';
-// import 'package:test_app/screens/component/defaultContainer.dart';
-// import 'package:test_app/screens/component/Validate.dart';
-import 'package:test_app/screens/login/LoginForm.dart';
-import 'package:http/http.dart' as http;
+import 'package:test_app/screens/component/Validate.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:test_app/screens/login/LoginServer.dart'; 
 class LoginScreen extends StatefulWidget {
   @override
   LodinPage createState() => LodinPage();
 }
 class LodinPage extends State<LoginScreen> {
-  Future<void> connectToNode() async {
-    try {
-      // 使用適合模擬器的地址
-      final response = await http.get(Uri.parse('http://10.0.2.2:3000'));
-      if (response.statusCode == 200) {
-        print('Response from Node.js: ${response.body}');
-      } else {
-        print('Failed to connect: ${response.statusCode}');
-      }
-    } catch (e) {
-      print('Error connecting to Node.js: $e');
-    }
-  }
+  bool _obscureText = true;
+  final formkey = GlobalKey<FormState>();
+
+  //使用者輸入帳密
+  String  email = '';
+  String  password = '';
+
+  //帳密的錯誤訊息
+  String? emailError;
+  String? passwordError;
+
   @override
   Widget build(BuildContext context) {
     return ProgressHUD(
@@ -55,7 +51,62 @@ class LodinPage extends State<LoginScreen> {
                   SizedBox(height: 10),
 
                   //登入表單
-                  LoginForm(),
+                  Form(
+                    key: formkey,
+                    child: Column(
+                      children: [
+                        CustomTextField(
+                          hintText: 'example@gmail.com',
+                          onChanged: (value){
+                            setState(() {
+                              email = value;
+                              emailError = Validate.validateEmail(value);//及時驗證
+                            });
+                          },
+                          //因測試用的帳號不符格式，因此帳號的表單送出驗證暫時註解
+                          // validator: (value) => Validate.validateEmail(value),
+                          haveborder: true,
+                          errorText: emailError,
+                        ),
+                        SizedBox(height: 10),
+                        
+                        //密碼輸入框
+                        CustomTextField(
+                          hintText: '6~8位數密碼',
+                          obscureText: _obscureText,//切換密碼可視性
+                          onChanged: (value){
+                            setState(() {
+                              password = value;
+                              passwordError = Validate.validatePassword(value);//及時驗證
+                            });
+                          },
+                          validator: (value) => Validate.validatePassword(value),//formkey驗證需在validator裡
+                          haveborder: true,
+                          errorText: passwordError,//即時驗證之錯誤訊息顯示於輸入框下方
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              _obscureText ? Icons.visibility_off : Icons.visibility,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _obscureText = !_obscureText;
+                              });
+                            },
+                          )
+                        ),
+                        SizedBox(height: 10),
+                        //登入按鈕
+                        CustomButton(
+                          text: '登入',
+                          onPressed: () {
+                            if (formkey.currentState!.validate()) {
+                              AuthService.loginform(context, email, password);
+                            }
+                          },
+                        ),
+                      ],
+                    )
+                  ),
                   
                   //註冊按鈕
                   CustomButton(
@@ -81,6 +132,8 @@ class LodinPage extends State<LoginScreen> {
                     ],
                   ),
                   SizedBox(height: 32),
+
+                  //分隔線
                   Row(
                     children: [
                       Expanded(

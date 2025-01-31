@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test_app/screens/login/LoginPage.dart';
 
 import 'package:test_app/screens/login/RegisterPage.dart';
-import 'package:test_app/screens/login/Forgetpasswd.dart';
+import 'package:test_app/screens/login/RequestRest.dart';
 import 'package:test_app/screens/login/VerificationPage.dart';
 import 'package:test_app/screens/login/ResetPasswd.dart';
 

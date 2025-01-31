@@ -16,11 +16,12 @@ class Forgetpasswd extends State<ForgetpasswdScreen> {
       headers:{"Content-Type": "application/json"},
       body: jsonEncode({"email": email}),
     );
-    if(response.statusCode == 200){
-      print("重設密碼連結已發送: ${response.body}");
-    }else{
-      print("請求失敗: ${response.body}");
-    }
+    final data = json.decode(response.body);
+    print(data['message']);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(data['message']))
+    );
+    
   }
 
   @override
@@ -78,9 +79,9 @@ class Forgetpasswd extends State<ForgetpasswdScreen> {
                   onPressed: () async{
                     final email = emailController.text.trim();
                     await requestPasswordReset(email);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("重設密碼聯結將發送至您的信箱"))
-                    );
+                    // ScaffoldMessenger.of(context).showSnackBar(
+                    //   SnackBar(content: Text("重設密碼聯結將發送至您的信箱"))
+                    // );
                   },
                   child: Text(
                     '送出',
