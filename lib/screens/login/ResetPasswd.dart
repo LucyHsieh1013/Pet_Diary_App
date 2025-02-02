@@ -1,36 +1,24 @@
 import 'package:flutter/material.dart';
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
-class ResetpasswdScreen extends StatefulWidget {
-  // final String token;
-  // ResetpasswdScreen({required this.token});
+import 'package:test_app/screens/login/ResetPasswordServer.dart';
+import 'package:test_app/screens/component/Validate.dart';
+import 'package:test_app/screens/component/defaultTextField.dart';
+import 'package:test_app/screens/component/defaultButton.dart';
 
+class ResetpasswdScreen extends StatefulWidget {
   @override
   Resetpasswd createState() => Resetpasswd();
 }
-
 class Resetpasswd extends State<ResetpasswdScreen> {
   bool _obscureText = true;
-  // final TextEditingController passwordController = TextEditingController();
+  final formkey = GlobalKey<FormState>();
 
-
-  // Future<void> ResetPassword(String token, String newPassword) async{
-  //   final url = Uri.parse("http://10.0.2.2:3000/resetpassword/reset-password");
-  //   final response = await http.post(
-  //     url,
-  //     headers:{"Content-Type": "application/json"},
-  //     body: jsonEncode({
-  //       "token": token,
-  //       "newPassword": newPassword,
-  //     }),
-  //   );
-  //   if(response.statusCode == 200){
-  //     print("密碼重設成功: ${response.body}");
-  //   }else{
-  //     print("密碼重設失敗: ${response.body}");
-  //   }
-  // }
+  final TextEditingController passwordController = TextEditingController();
   
+  String password = '';
+  String confirmPassword = '';
+
+  String? passwordError;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,82 +46,69 @@ class Resetpasswd extends State<ResetpasswdScreen> {
                 ),
               ),
               SizedBox(height: 10),
-              Container(
-                width: 300,
-                child: TextField(
-                  // controller: passwordController,
-                  obscureText: _obscureText,
-                  decoration: InputDecoration(
-                    hintText: '6~8位數密碼',
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30)
-                    ),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscureText ? Icons.visibility_off : Icons.visibility,
-                      ),
-                      onPressed: () {
+              Form(
+                key: formkey,
+                child: Column(
+                  children: [
+                    CustomTextField(
+                      controller: passwordController,
+                      hintText: '6~8位數密碼',
+                      obscureText: _obscureText,
+                      onChanged: (value){
                         setState(() {
-                          _obscureText = !_obscureText;
+                          password = value;
+                          passwordError = Validate.validatePassword(value);//及時驗證
                         });
                       },
-                    )
-                  ),
-                ),
-              ),SizedBox(height: 10),
-              Container(
-                width: 300,
-                child: TextField(
-                  obscureText: _obscureText,
-                  decoration: InputDecoration(
-                    hintText: '再次輸入密碼',
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
+                      validator: (value) => Validate.validatePassword(value),//formkey驗證需在validator裡
+                      haveborder: true,
+                      errorText: passwordError,
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscureText ? Icons.visibility_off : Icons.visibility,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _obscureText = !_obscureText;
+                          });
+                        },
+                      )
                     ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30)
-                    ),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscureText ? Icons.visibility_off : Icons.visibility,
-                      ),
-                      onPressed: () {
+                    SizedBox(height: 10),
+                    CustomTextField(
+                      hintText: '6~8位數密碼',
+                      obscureText: _obscureText,
+                      onChanged: (value){
                         setState(() {
-                          _obscureText = !_obscureText;
+                          confirmPassword = value;
                         });
                       },
-                    )
-                  ),
-                ),
-              ),
-              SizedBox(height: 10),
-              SizedBox(
-                width: 300,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    side: const BorderSide(
-                      color: Color.fromARGB(255, 213, 213, 213)
+                      validator: (value) => Validate.confirmPassword(password,value),
+                      haveborder: true,
+                      // errorText: confirmPasswordError,
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscureText ? Icons.visibility_off : Icons.visibility,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _obscureText = !_obscureText;
+                          });
+                        },
+                      )
                     ),
-                    shadowColor: Colors.grey
-                  ),
-                  onPressed: () async{
-                    // final email = passwordController.text.trim();
-                    // await ResetPassword(token, newpassword);
-                    // ScaffoldMessenger.of(context).showSnackBar(
-                    //   SnackBar(content: Text("重設密碼聯結將發送至您的信箱"))
-                    // );
-                  },
-                  child: Text(
-                    '確定',
-                    style: TextStyle(
-                      color: Colors.red,
+                    SizedBox(height: 10),
+                    CustomButton(
+                      text: '確定',
+                      onPressed: () {
+                        print(password);
+                        if (formkey.currentState!.validate()) {
+                          ResetService.ResetPassword(context, password);
+                        }
+                      },
                     ),
-                  ),
-                  
-                ),
+                  ]
+                )
               ),
             ]
           ),

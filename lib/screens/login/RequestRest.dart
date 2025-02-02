@@ -1,28 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-class ForgetpasswdScreen extends StatefulWidget {
+import 'package:test_app/screens/login/ResetPasswordServer.dart';
+class RequestRestScreen extends StatefulWidget {
   @override
-  Forgetpasswd createState() => Forgetpasswd();
+  RequestRest createState() => RequestRest();
 }
-
-class Forgetpasswd extends State<ForgetpasswdScreen> {
+class RequestRest extends State<RequestRestScreen> {
   final TextEditingController emailController = TextEditingController();
-
-  Future<void> requestPasswordReset(String email) async{
-    final url = Uri.parse("http://10.0.2.2:3000/resetpassword/request-reset");
-    final response = await http.post(
-      url,
-      headers:{"Content-Type": "application/json"},
-      body: jsonEncode({"email": email}),
-    );
-    final data = json.decode(response.body);
-    print(data['message']);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(data['message']))
-    );
-    
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +61,7 @@ class Forgetpasswd extends State<ForgetpasswdScreen> {
                   ),
                   onPressed: () async{
                     final email = emailController.text.trim();
-                    await requestPasswordReset(email);
+                    ResetService.requestPasswordReset(context, email);
                     // ScaffoldMessenger.of(context).showSnackBar(
                     //   SnackBar(content: Text("重設密碼聯結將發送至您的信箱"))
                     // );

@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => LoginScreen(),//登入
         '/home': (context) => NavController(),//導覽列(管理五個主要畫面)
         '/register': (context) => RegisterScreen(),//註冊
-        '/forgetpasswd': (context) => ForgetpasswdScreen(),//忘記密碼
+        '/RequestRest': (context) => RequestRestScreen(),//忘記密碼
         '/Verification': (context) => VerificationScreen(),//忘記密碼-驗證碼
         '/Resetpasswd': (context) => ResetpasswdScreen(),//忘記密碼-重設密碼
         // '/Setting': (context) => SettingPage(),//Appbar的設定

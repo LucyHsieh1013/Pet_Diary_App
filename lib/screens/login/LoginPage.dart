@@ -120,7 +120,7 @@ class LodinPage extends State<LoginScreen> {
                     children: [
                       InkWell(
                         onTap: () {
-                          Navigator.pushNamed(context, '/forgetpasswd');
+                          Navigator.pushNamed(context, '/RequestRest');
                         },
                         child: Text(
                           '忘記密碼?',
