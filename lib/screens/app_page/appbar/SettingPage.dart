@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 // import 'package:test_app/screens/component/defaultContainer.dart';
+import 'package:test_app/screens/app_page/appbar/ThemeOption.dart';
 
 Drawer SettingDrawer(BuildContext context) {
   return Drawer(
@@ -25,40 +26,40 @@ Drawer SettingDrawer(BuildContext context) {
           },
         ),
         ListTile(
-          leading:  Icon(Icons.article),
+          leading:  Icon(Icons.palette),
           title: Text('主題'),
           onTap: (){
-            //
+            ThemeSheet(context);
           },
         ),
         ListTile(
-          leading:  Icon(Icons.article),
-          title: Text('字體'),
-          onTap: (){
-            //
-          },
-        ),
-        ListTile(
-          leading:  Icon(Icons.article),
+          leading:  Icon(Icons.language),
           title: Text('語言設定'),
           onTap: (){
             //
           },
         ),
-        ListTile(
-          leading:  Icon(Icons.article),
-          title: Text('小工具編輯'),
-          onTap: (){
-            //
-          },
-        ),
-        ListTile(
-          leading:  Icon(Icons.article),
-          title: Text('帳戶'),
-          onTap: (){
-            //
-          },
-        ),
+        // ListTile(
+        //   leading:  Icon(Icons.article),
+        //   title: Text('字體'),
+        //   onTap: (){
+        //     //
+        //   },
+        // ),
+        // ListTile(
+        //   leading:  Icon(Icons.article),
+        //   title: Text('小工具編輯'),
+        //   onTap: (){
+        //     //
+        //   },
+        // ),
+        // ListTile(
+        //   leading:  Icon(Icons.article),
+        //   title: Text('帳戶'),
+        //   onTap: (){
+        //     //
+        //   },
+        // ),
         ListTile(
           leading: Icon(Icons.exit_to_app),
           title: Text('登出'),

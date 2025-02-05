@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/screens/component/defaultContainer.dart';
-import 'package:test_app/screens/app_page/component/PetImg.dart';
+import 'package:test_app/screens/component/PetImg.dart';
 
 class PetPage extends StatefulWidget{
   @override

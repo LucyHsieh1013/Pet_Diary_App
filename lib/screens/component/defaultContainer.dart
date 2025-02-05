@@ -13,7 +13,7 @@ class CustomContainer extends StatelessWidget {
     this.height,
     this.alignment = Alignment.center,
     this.child,
-    this.color = const Color.fromARGB(255, 231, 203, 178)
+    this.color = Colors.white,
   }):super(key: key);
 
   @override

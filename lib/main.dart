@@ -8,9 +8,8 @@ import 'package:test_app/screens/login/ResetPasswd.dart';
 
 import 'package:test_app/screens/app_page/NavController.dart';
 // import 'package:test_app/screens/app_page/appbar/SettingPage.dart';
-import 'package:test_app/screens/app_page/component/AddPetForm.dart';
+import 'package:test_app/screens/app_page/pet/AddPetForm.dart';
 // import 'package:test_app/screens/app_page/pet/PetPage.dart';
-
 void main() {
   runApp(MyApp());
 }
