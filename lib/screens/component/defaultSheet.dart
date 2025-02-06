@@ -30,7 +30,7 @@ void showCustomDialog(BuildContext context, String title, Widget body) {
                         Center( // 標題置中
                           child: Text(
                             title,
-                            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                            style: const TextStyle(fontSize: 20),
                           ),
                         ),
                         Positioned( // 右上角的關閉按鈕

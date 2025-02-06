@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 // import 'package:test_app/screens/component/defaultContainer.dart';
 import 'package:test_app/screens/app_page/appbar/ThemeOption.dart';
+import 'package:test_app/screens/app_page/appbar/Language.dart';
+
 
 Drawer SettingDrawer(BuildContext context) {
   return Drawer(
@@ -36,7 +38,7 @@ Drawer SettingDrawer(BuildContext context) {
           leading:  Icon(Icons.language),
           title: Text('語言設定'),
           onTap: (){
-            //
+            LanguageSheet(context);
           },
         ),
         // ListTile(

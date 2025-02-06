@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/screens/app_page/Diary/recordSheet.dart';
+import 'package:test_app/screens/component/defaultButton.dart';
 
 void FloatbtnFirst(BuildContext context){
     showModalBottomSheet(
@@ -30,29 +31,35 @@ void FloatbtnFirst(BuildContext context){
                 },
               ),
               SizedBox(height: 10),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: (){
-                    Navigator.pop(context);
-                  }, 
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    side: BorderSide(
-                      color: const Color.fromARGB(255, 195, 195, 195),
-                    ),
-                    shadowColor: Colors.grey,
-                  ),
-                  child: Text(
-                    '取消',
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),  
-                  ),
-                ),
+              CustomButton(
+                text: '取消',
+                onPressed: (){
+                  Navigator.pop(context);
+                },
               ),
+              // SizedBox(
+              //   width: double.infinity,
+              //   child: ElevatedButton(
+              //     onPressed: (){
+              //       Navigator.pop(context);
+              //     }, 
+              //     style: ElevatedButton.styleFrom(
+              //       shape: RoundedRectangleBorder(
+              //         borderRadius: BorderRadius.circular(8),
+              //       ),
+              //       side: BorderSide(
+              //         color: const Color.fromARGB(255, 195, 195, 195),
+              //       ),
+              //       shadowColor: Colors.grey,
+              //     ),
+              //     child: Text(
+              //       '取消',
+              //       style: TextStyle(
+              //         color: Colors.black,
+              //       ),  
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         );

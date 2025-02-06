@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/screens/login/ResetPasswordServer.dart';
 import 'dart:async'; // Timer
+import 'package:test_app/screens/component/defaultButton.dart';
+
 class VerificationScreen extends StatefulWidget {
   @override
   Verification createState() => Verification();
@@ -90,6 +92,7 @@ class Verification extends State<VerificationScreen> {
                     width: 150,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
                         side: const BorderSide(
                           color: Color.fromARGB(255, 213, 213, 213)
                         ),
@@ -110,21 +113,30 @@ class Verification extends State<VerificationScreen> {
                     ),
                   ),
                   SizedBox(width: 5),
-                  SizedBox(
+                  CustomButton(
+                    backgroundColor: Colors.white,
+                    textColor: Colors.black,
                     width: 150,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        side: const BorderSide(
-                          color: Color.fromARGB(255, 213, 213, 213)
-                        ),
-                        shadowColor: Colors.grey
-                      ),
-                      onPressed: () {
-                        ResetService.requestPasswordReset(context, email);
-                      },
-                      child: Text('重新傳送驗證碼'),
-                    ),
+                    text: '重新傳送驗證碼',
+                    onPressed: () {
+                      ResetService.requestPasswordReset(context, email);
+                    },
                   ),
+                  // SizedBox(
+                  //   width: 150,
+                  //   child: ElevatedButton(
+                  //     style: ElevatedButton.styleFrom(
+                  //       side: const BorderSide(
+                  //         color: Color.fromARGB(255, 213, 213, 213)
+                  //       ),
+                  //       shadowColor: Colors.grey
+                  //     ),
+                  //     onPressed: () {
+                  //       ResetService.requestPasswordReset(context, email);
+                  //     },
+                  //     child: Text('重新傳送驗證碼'),
+                  //   ),
+                  // ),
                 ]
               ),
               

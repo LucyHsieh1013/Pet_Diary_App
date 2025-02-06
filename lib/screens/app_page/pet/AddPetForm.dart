@@ -13,6 +13,8 @@ class AddPetForm extends StatefulWidget {
 }
 
 class AddPetFormState extends State<AddPetForm> {
+  final imageUrl = null;//存放圖片路徑
+
   @override
   Widget build(BuildContext context) {
     return ScrollableScaffold(
@@ -37,7 +39,17 @@ class AddPetFormState extends State<AddPetForm> {
         padding: const EdgeInsets.all(30),
         child: Column(
           children: [
-            PetImage(imgUrl: '', Iconbutton: true,),//''填圖片路徑，預設為icon
+            PetImage(imgUrl:'',),
+            // CircleAvatar(
+            //   radius: 40,
+            //   backgroundColor: Theme.of(context).primaryColor,
+            //   backgroundImage: (imageUrl != null && imageUrl!.isNotEmpty)
+            //     ? NetworkImage(imageUrl!) // 只有當 `imageUrl` 存在時才載入圖片
+            //     : null, // 否則不顯示圖片
+            //   child: (imageUrl == null || imageUrl!.isEmpty)
+            //     ? Icon(Icons.pets, color: Colors.white) // 預設圖示
+            //     : null,
+            // ),
             CustomTextField(hintText: '寵物名字', onChanged: (context){},),
             SizedBox(height: 20),
             CustomTextField(hintText: '品種', onChanged: (context){},),

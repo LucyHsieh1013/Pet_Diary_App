@@ -97,6 +97,8 @@ class LodinPage extends State<LoginScreen> {
                         SizedBox(height: 10),
                         //登入按鈕
                         CustomButton(
+                          backgroundColor: Colors.white,
+                          textColor: Colors.black,
                           text: '登入',
                           onPressed: () {
                             if (formkey.currentState!.validate()) {
@@ -110,6 +112,8 @@ class LodinPage extends State<LoginScreen> {
                   
                   //註冊按鈕
                   CustomButton(
+                    backgroundColor: Colors.white,
+                    textColor: Colors.black,
                     text: '註冊帳號',
                     onPressed: () {
                       Navigator.pushNamed(context, '/register');

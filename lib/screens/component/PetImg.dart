@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class PetImage extends StatelessWidget {
+class PetImage extends StatefulWidget {
   final String imgUrl;
   final bool Iconbutton;
 
@@ -10,48 +10,61 @@ class PetImage extends StatelessWidget {
     this.Iconbutton = false,
   }) : super(key: key); 
 
+  _ProfileImageUploaderState createState() => _ProfileImageUploaderState();
+}
+class _ProfileImageUploaderState extends State<PetImage> {
+  // File? _imageFile;
+
+  // Future<void> _pickImage() async {
+  //   final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+  //   if (pickedFile != null) {
+  //     setState(() {
+  //       _imageFile = File(pickedFile.path);
+  //     });
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
-    return ClipOval(
+    final imageUrl = null;
+    return Center(
       child: Stack(
-        alignment: Alignment.center,
         children: [
-          if (Iconbutton)
-            Container(
-              width: 150,
-              height: 150,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.transparent,
+          // CircleAvatar(
+          //   radius: 50,
+          //   backgroundColor: Colors.grey[300], // 預設背景
+          //   backgroundImage: _imageFile != null ? FileImage(_imageFile!) : null,
+          //   child: _imageFile == null
+          //       ? Icon(Icons.person, size: 50, color: Colors.white) // 預設圖示
+          //       : null,
+          // ),
+          CircleAvatar(
+            radius: 40,
+            backgroundColor: Theme.of(context).primaryColor,
+            backgroundImage: (imageUrl != null && imageUrl!.isNotEmpty)
+              ? NetworkImage(imageUrl!) // 只有當 `imageUrl` 存在時才載入圖片
+              : null, // 否則不顯示圖片
+            child: (imageUrl == null || imageUrl!.isEmpty)
+              ? Icon(Icons.pets, color: Colors.white) // 預設圖示
+              : null,
+          ),
+          Positioned(
+            bottom: 0,
+            right: 0,
+            child: GestureDetector(
+              // onTap: _pickImage,
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  // color: Colors.grey, // 上傳按鈕背景色
+                ),
+                padding: EdgeInsets.all(6),
+                child: Icon(Icons.camera_alt, color: Colors.black, size: 20),
               ),
             ),
-          imgUrl.isNotEmpty
-            ?Image.network(
-              imgUrl,
-              width: 100,
-              height: 100,
-              fit: BoxFit.cover,
-            )
-            :Container(
-              width: 100,
-              height: 100,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: const Color.fromARGB(255, 232, 176, 124),
-              ),
-            ),
-          if (Iconbutton)
-            Positioned(
-              bottom: 30, // 往下超出10個像素
-              right: 30,  // 往右超出10個像素
-              child: Icon(
-                Icons.camera_alt,
-                size: 20,
-                color: Colors.black, // 圖標顏色
-              ),
-            )
-        ]
-      )
+          ),
+        ],
+      ),
     );
   }
 }

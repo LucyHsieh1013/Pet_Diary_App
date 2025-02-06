@@ -183,6 +183,8 @@ class RegisterPage extends State<RegisterScreen> {
                 
                 SizedBox(height: 10),
                 CustomButton(
+                  backgroundColor: Colors.white,
+                  textColor: Colors.black,
                   text: '註冊',
                   onPressed: formSubmit,
                 ),

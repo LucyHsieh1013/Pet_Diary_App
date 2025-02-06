@@ -99,6 +99,8 @@ class Resetpasswd extends State<ResetpasswdScreen> {
                     ),
                     SizedBox(height: 10),
                     CustomButton(
+                      backgroundColor: Colors.white,
+                      textColor: Colors.black,
                       text: '確定',
                       onPressed: () {
                         print(password);

@@ -32,6 +32,30 @@ class MyApp extends StatelessWidget {
         '/Addform': (context) => AddPetForm(),
         // '/Pet': (context) => PetPage(),
       },
+
+      theme: ThemeData(
+        primaryColor: Color.fromARGB(255, 232, 176, 124),
+        brightness: Brightness.light,
+        scaffoldBackgroundColor: Colors.white,
+
+        appBarTheme: AppBarTheme(
+          backgroundColor: Color.fromARGB(255, 232, 176, 124),
+          titleTextStyle: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+          iconTheme: IconThemeData(color: Colors.white),
+        ),
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(fontSize: 18, color: Colors.black), // 主要文字樣式
+          bodyMedium: TextStyle(fontSize: 16, color: Colors.black),
+          titleLarge: TextStyle(fontSize: 22, fontWeight: FontWeight.bold), // 標題
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Color.fromARGB(255, 232, 176, 124), // 按鈕背景顏色
+            foregroundColor: Colors.white, // 按鈕文字顏色
+            // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)), // 圓角按鈕
+          ),
+        ),
+      ),
     );
   }
 }
