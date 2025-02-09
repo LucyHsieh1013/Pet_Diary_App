@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:test_app/services/Token.dart';
+import 'package:test_app/services/provider.dart';//加載以及重置provider
 
 class AuthService {
   static Future<void> connectToNode() async {
@@ -38,9 +40,17 @@ class AuthService {
       progress?.dismiss();
 
       if (response.statusCode == 200) {
+        String token = data['token'];
+        print('存取token: ${token}');
+        await saveToken(token);//token存到本地端
+        String? aftersavetoken = await getToken();
+        print('存取後的token: ${aftersavetoken}');
+
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(data['message'])),
         );
+
+        loadAllProviders(context);//加載provider
         Navigator.pushNamed(context, '/home'); // 跳轉到主畫面
       } else {
         ScaffoldMessenger.of(context).showSnackBar(

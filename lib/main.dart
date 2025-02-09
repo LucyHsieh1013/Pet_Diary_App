@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:test_app/provider/UserInformation.dart';
+
 import 'package:test_app/screens/login/LoginPage.dart';
 
 import 'package:test_app/screens/login/RegisterPage.dart';
@@ -10,8 +13,16 @@ import 'package:test_app/screens/app_page/NavController.dart';
 // import 'package:test_app/screens/app_page/appbar/SettingPage.dart';
 import 'package:test_app/screens/app_page/pet/AddPetForm.dart';
 // import 'package:test_app/screens/app_page/pet/PetPage.dart';
+
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => UserProvider())
+      ],
+      child: MyApp(),
+    )
+  );
 }
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

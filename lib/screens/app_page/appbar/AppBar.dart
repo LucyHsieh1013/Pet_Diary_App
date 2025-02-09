@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-// import 'package:test_app/screens/app_page/appbar/SettingPage.dart';
+import 'package:provider/provider.dart';
+import 'package:test_app/provider/UserInformation.dart';
 
 AppBar buildAppBar(BuildContext context){
   return AppBar(
@@ -12,7 +13,12 @@ AppBar buildAppBar(BuildContext context){
       ),
     ),
 
-    title: Text('使用者'),
+    title: Consumer<UserProvider>(
+      builder: (context, userProvider, child){
+        print('username: ${userProvider.username}');
+        return Text(userProvider.username);
+      }
+    ),
     centerTitle: true,// title至中
     actions: [
       Builder(
@@ -20,7 +26,6 @@ AppBar buildAppBar(BuildContext context){
           return IconButton(
             icon: Icon(Icons.settings),
             onPressed: () {
-              // 使用 Builder 小部件包裹 context，以便正確訪問 Scaffold
               Scaffold.of(context).openEndDrawer();
             },
           );

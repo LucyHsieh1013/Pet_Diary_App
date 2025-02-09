@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-// import 'package:test_app/screens/component/defaultContainer.dart';
 import 'package:test_app/screens/app_page/appbar/ThemeOption.dart';
 import 'package:test_app/screens/app_page/appbar/Language.dart';
-
+import 'package:test_app/services/Token.dart';
+import 'package:provider/provider.dart';
+import 'package:test_app/provider/UserInformation.dart';
+import 'package:test_app/services/provider.dart';
 
 Drawer SettingDrawer(BuildContext context) {
   return Drawer(
@@ -13,8 +15,18 @@ Drawer SettingDrawer(BuildContext context) {
           decoration: BoxDecoration(
             color: const Color.fromARGB(255, 232, 176, 124),//導覽列背景顏色
           ),
-          accountName: Text('使用者名稱'),
-          accountEmail: Text('user@example.com'),
+          accountName: Consumer<UserProvider>(
+            builder: (context, userProvider, child){
+              print('username: ${userProvider.username}');
+              return Text(userProvider.username);
+            }
+          ),
+          accountEmail: Consumer<UserProvider>(
+            builder: (context, userProvider, child){
+              print('useremail: ${userProvider.useremail}');
+              return Text(userProvider.useremail);
+            }
+          ),
           currentAccountPicture: CircleAvatar(
             backgroundColor: Colors.white,
             child: Icon(Icons.person, color: Colors.blue),
@@ -41,33 +53,10 @@ Drawer SettingDrawer(BuildContext context) {
             LanguageSheet(context);
           },
         ),
-        // ListTile(
-        //   leading:  Icon(Icons.article),
-        //   title: Text('字體'),
-        //   onTap: (){
-        //     //
-        //   },
-        // ),
-        // ListTile(
-        //   leading:  Icon(Icons.article),
-        //   title: Text('小工具編輯'),
-        //   onTap: (){
-        //     //
-        //   },
-        // ),
-        // ListTile(
-        //   leading:  Icon(Icons.article),
-        //   title: Text('帳戶'),
-        //   onTap: (){
-        //     //
-        //   },
-        // ),
         ListTile(
           leading: Icon(Icons.exit_to_app),
           title: Text('登出'),
           onTap: () {
-            // 處理登出點擊事件
-            // Navigator.pop(context);
             showAlert(context);
           },
         ),
@@ -75,7 +64,7 @@ Drawer SettingDrawer(BuildContext context) {
     ),
   );
 }
-Future<void> showAlert(BuildContext context) {
+Future<void> showAlert(BuildContext context) async{
   return showDialog<void>(
     context: context,
     builder: (BuildContext context) {
@@ -84,7 +73,11 @@ Future<void> showAlert(BuildContext context) {
         actions: <Widget>[
           ElevatedButton(
             child: Text('確定'),
-            onPressed: () {
+            onPressed: () async{
+              resetAllProviders(context); //重置provider
+              await removeToken(); //刪除token
+              String? afterdeletetoken = await getToken();
+              print('刪除後的token: ${afterdeletetoken}');
               Navigator.pushNamed(context, '/');
             },
           ),
@@ -93,95 +86,3 @@ Future<void> showAlert(BuildContext context) {
     },
   );
 }
-// class SettingPage extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return ScrollableScaffold(
-//       appBar: AppBar(
-//         title: Text('設定'),
-//         centerTitle: true,
-//         bottom: PreferredSize(
-//           preferredSize: const Size.fromHeight(10.0),
-//           child: Container(
-//             height: 1.0,
-//             color: Colors.grey.withOpacity(0.5),
-//           ),
-//         ),
-//       ),
-      
-//       body: Padding(
-//         padding: const EdgeInsets.all(10),
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           mainAxisSize: MainAxisSize.min,
-//           children: [
-//             ListTile(
-//               leading:  Icon(Icons.article),
-//               title: Text('修改密碼'),
-//               onTap: (){
-//                 //
-//               },
-//             ),
-//             Divider(),
-//             ListTile(
-//               leading:  Icon(Icons.article),
-//               title: Text('主題'),
-//               onTap: (){
-//                 //
-//               },
-//             ),
-//             Divider(),
-//             ListTile(
-//               leading:  Icon(Icons.article),
-//               title: Text('字體'),
-//               onTap: (){
-//                 //
-//               },
-//             ),
-//             Divider(),
-//             ListTile(
-//               leading:  Icon(Icons.article),
-//               title: Text('提醒設定'),
-//               onTap: (){
-//                 //
-//               },
-//             ),
-//             Divider(),
-//             ListTile(
-//               leading:  Icon(Icons.article),
-//               title: Text('語言設定'),
-//               onTap: (){
-//                 //
-//               },
-//             ),
-//             Divider(),
-//             ListTile(
-//               leading:  Icon(Icons.article),
-//               title: Text('小工具編輯'),
-//               onTap: (){
-//                 //
-//               },
-//             ),
-//             Divider(),
-//             ListTile(
-//               leading:  Icon(Icons.article),
-//               title: Text('應用程式啟動分頁'),
-//               onTap: (){
-//                 //
-//               },
-//             ),
-//             Divider(),
-//             ListTile(
-//               leading:  Icon(Icons.article),
-//               title: Text('帳戶'),
-//               onTap: (){
-//                 //
-//               },
-//             ),
-//             Divider(),
-//           ],
-//         ),
-//       ),
-//     ); 
-//   } 
-// }
