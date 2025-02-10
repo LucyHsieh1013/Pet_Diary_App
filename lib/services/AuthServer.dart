@@ -64,4 +64,38 @@ class AuthService {
       );
     }
   }
+
+  static Future<void> RigisterSubmit(BuildContext context, String username, String email, String password, String confirmPassword) async{
+    try{
+      final response = await http.post(
+        Uri.parse('http://10.0.2.2:3000/register'),
+        headers: {'Content-Type':'application/json'},
+        body: json.encode({
+          'username' : username,
+          'email': email,
+          'password':password,
+        })
+      );
+
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
+
+      final data = json.decode(response.body);
+
+      if(response.statusCode == 200 ){
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(data['message']))
+        );
+        Navigator.pushNamed(context, '/'); //跳轉到主畫面
+      }else{
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(data['message'] ?? '登入失敗'))
+        );
+      }
+    }catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('發生錯誤: $e')),
+      );
+    }
+  }
 }

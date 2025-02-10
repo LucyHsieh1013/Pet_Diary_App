@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:test_app/screens/component/theme_option.dart';
+import 'package:test_app/component/theme_option.dart';
 
-import 'package:test_app/screens/component/defaultSheet.dart';
-import 'package:test_app/screens/component/Themes.dart';
+import 'package:test_app/component/defaultSheet.dart';
+import 'package:test_app/component/Themes.dart';
 
 class SettingModel extends ChangeNotifier {
   ThemeData _themeData = BlueGreyTheme;

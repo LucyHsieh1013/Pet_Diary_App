@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/services/ResetPasswordServer.dart';
-import 'package:test_app/screens/component/defaultButton.dart';
+import 'package:test_app/component/defaultButton.dart';
 
 class RequestRestScreen extends StatefulWidget {
   @override

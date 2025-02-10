@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test_app/screens/component/defaultButton.dart';
+import 'package:test_app/component/defaultButton.dart';
 
 class AddPetPage extends StatelessWidget {
   @override

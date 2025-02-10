@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/services/Validate.dart';
-import 'package:test_app/screens/component/defaultTextField.dart';
-import 'package:test_app/screens/component/defaultButton.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:test_app/component/defaultTextField.dart';
+import 'package:test_app/component/defaultButton.dart';
+import 'package:test_app/services/AuthServer.dart'; 
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -14,71 +13,24 @@ class RegisterPage extends State<RegisterScreen> {
   bool _obscureText = true;
   final formkey = GlobalKey<FormState>();
 
+  String username = '';
   String email = '';
   String password = '';
   String confirmPassword = '';
 
+  String? usernameError;
   String? emailError;
   String? passwordError;
   String? confirmPasswordError;
 
-  Future<void> formSubmit() async{
-    if(formkey.currentState!.validate()){
-      try{
-        final response = await http.post(
-          Uri.parse('http://10.0.2.2:3000/register'),
-          headers: {'Content-Type':'application/json'},
-          body: json.encode({
-            'email': email,
-            'password':password,
-          })
-        );
-
-        print('Response status: ${response.statusCode}');
-        print('Response body: ${response.body}');
-
-        final data = json.decode(response.body);
-
-        if(response.statusCode == 200 ){
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(data['message']))
-          );
-          Navigator.pushNamed(context, '/'); //跳轉到主畫面
-        }else{
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(data['message'] ?? '登入失敗'))
-          );
-        }
-      }catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('發生錯誤: $e')),
-        );
-      }
-    }
-  }
-
-  void validateEmail(String value) {
-    setState(() {
-      emailError = Validate.validateEmail(value);
-    });
-  }
-  void validatePassword(String value) {
-    setState(() {
-      passwordError = Validate.validatePassword(value);
-    });
-  }
-  void validateConfirmPasswordOnSubmit() {
-    setState(() {
-      confirmPasswordError = Validate.confirmPassword(password, confirmPassword);
-    });
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 50),  
-          
+
+          //註冊帳號表單
           child: Form(
             key: formkey,
             child: Column(
@@ -103,11 +55,24 @@ class RegisterPage extends State<RegisterScreen> {
                 ),
                 SizedBox(height: 10),
                 CustomTextField(
+                  hintText: '使用者名稱',
+                  onChanged: (value){
+                    setState(() {
+                      username = value; // 對話框內容
+                      usernameError = Validate.validateUsername(value); // 及時驗證
+                    });
+                  },
+                  validator: (value) => Validate.validateUsername(value), // formkey驗證
+                  haveborder: true,
+                  errorText: usernameError, //錯誤訊息顯示
+                ),
+                SizedBox(height: 10),
+                CustomTextField(
                   hintText: 'example@gmail.com',
                   onChanged: (value){
                     setState(() {
                       email = value;
-                      validateEmail(value);
+                      emailError = Validate.validateEmail(value);//及時驗證
                     });
                   },
                   validator: (value) => Validate.validateEmail(value),
@@ -121,7 +86,7 @@ class RegisterPage extends State<RegisterScreen> {
                   onChanged: (value){
                     setState(() {
                       password = value;
-                      validatePassword(value);
+                      passwordError = Validate.validatePassword(value);//及時驗證
                     });
                   },
                   validator: (value) => Validate.validatePassword(value),//formkey驗證需在validator裡
@@ -186,7 +151,11 @@ class RegisterPage extends State<RegisterScreen> {
                   backgroundColor: Colors.white,
                   textColor: Colors.black,
                   text: '註冊',
-                  onPressed: formSubmit,
+                  onPressed: () {
+                    if(formkey.currentState!.validate()){
+                      AuthService.RigisterSubmit(context, username,email, password, confirmPassword);
+                    }
+                  },
                 ),
               ]
             ),
@@ -197,19 +166,3 @@ class RegisterPage extends State<RegisterScreen> {
     );
   }
 }
-
-  // void formSubmit(){
-  //   // validateEmail(email);
-  //   // validatePassword(password);
-  //   validateConfirmPasswordOnSubmit();
-
-  //   if(emailError == null && passwordError == null && confirmPasswordError == null){
-  //     print('提交的資料: email=$email, password=$password');
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(content: Text('註冊成功，可進行登入'))
-  //     );
-  //     Navigator.pop(context);
-  //   }else{
-  //     print('error');
-  //   }
-  // }

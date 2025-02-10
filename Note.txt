@@ -11,17 +11,37 @@
     token:
         登出按鈕在SettingPage.dart，登出時刪除token
         
-登入介面忘記密碼:
-    送出email會配發一組驗證碼，驗證碼送出後會配發token用作密碼修改
+未登入修改密碼:
+    送出email後會配發一組驗證碼，驗證碼送出後會配發token用作密碼修改
 
-Provider: 僅在第一次呼叫時抓取資料，之後同個物件即使切換畫面也不會重複加載
-    登出時必須重置provider(provider.dart)
-    再次登入時會呼叫provider(provider.dart)
-
+Provider: 用於讓同個物件不會因為切換畫面而一直重複加載
+    登出時必須重置provider(provider.dart)，否則下次登入仍是上一位使用者的資料
+    有重置provider，再次登入時才會再次呼叫provider(provider.dart)
+    問題:
+        使用者修改使用者介面資料時該如何應對?單獨重置某部分的provider?
 
 未來待改善之問題:
     驗證畫面的驗證按鈕尚未使用標準化按鈕(因為格式需要修改所以有點懶改天再弄)
     登入及註冊在格式錯誤的情況下若嘗試送出表單，直到下一次送出表單，及時驗證都處於失效狀態
 
-登入帳密:
+登入帳密(email非實際存在，無法用於接收驗證碼):
 test 123456
+Hsieh@gmail.com 123456
+
+專案大架構
+    Pet_Diary_App/
+    ├── backend/                   <-- 後端專案資料夾 (Node.js)
+    │   ├── router/                   <-- 路由處理資料夾 (如 auth.js, user.js)
+    │   ├── server.js                 <-- 伺服器設定
+    │   ├── db.js                     <-- 資料庫處理函式
+    │
+    ├── database/                  <-- 資料庫資料夾
+    │   ├── database.db               <-- 資料庫檔案
+    │
+    ├── lib/                       <-- 前端 Flutter 資料夾
+    │   ├── component/                <-- 公用元件資料夾
+    │   ├── provider/                 <-- Flutter 的provider資料夾
+    │   ├── screens/                  <-- Flutter 的畫面資料夾
+    │   ├── services/                 <-- 用來儲存 Token 或執行 API 請求等邏輯
+    │   ├── main.dart                 <-- 應用程式的入口點
+

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/screens/app_page/Diary/recordSheet.dart';
-import 'package:test_app/screens/component/defaultButton.dart';
+import 'package:test_app/component/defaultButton.dart';
 
 void FloatbtnFirst(BuildContext context){
     showModalBottomSheet(

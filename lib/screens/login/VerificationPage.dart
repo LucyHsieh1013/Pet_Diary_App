@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/services/ResetPasswordServer.dart';
 import 'dart:async'; // Timer
-import 'package:test_app/screens/component/defaultButton.dart';
+import 'package:test_app/component/defaultButton.dart';
 
 class VerificationScreen extends StatefulWidget {
   @override

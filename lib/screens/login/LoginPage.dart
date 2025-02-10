@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:test_app/screens/component/defaultTextField.dart';
-import 'package:test_app/screens/component/defaultButton.dart';
+import 'package:test_app/component/defaultTextField.dart';
+import 'package:test_app/component/defaultButton.dart';
 import 'package:test_app/services/Validate.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
-import 'package:test_app/services/LoginServer.dart'; 
+import 'package:test_app/services/AuthServer.dart'; 
 class LoginScreen extends StatefulWidget {
   @override
   LodinPage createState() => LodinPage();

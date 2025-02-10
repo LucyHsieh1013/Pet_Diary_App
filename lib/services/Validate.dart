@@ -1,5 +1,15 @@
 //驗證
 class Validate{
+  static String? validateUsername(String? value){
+    if(value == null || value.isEmpty){
+      return '請輸入使用者名稱';
+    }
+    if(value.length > 20 || value.length < 1){
+      return '使用者名稱長度不得超過20位';
+    }
+    return null;
+  }
+
   static String? validateEmail(String? value){
     if(value == null || value.isEmpty){
       return '請輸入Email';
@@ -10,6 +20,7 @@ class Validate{
     }
     return null;
   }
+
   static String? validatePassword(String? value){
     if(value == null || value.isEmpty){
       return '請輸入密碼';
@@ -19,6 +30,7 @@ class Validate{
     }
     return null;
   }
+
   static String? confirmPassword(String? password, String? confirmPssword){
     if(confirmPssword == null || confirmPssword.isEmpty){
       return '請輸入確認密碼';

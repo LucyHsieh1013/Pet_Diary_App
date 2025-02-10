@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 // import 'package:test_app/screens/app_page/Diary/floatbtnFirst.dart';
-import 'package:test_app/screens/component/defaultSheet.dart';
+import 'package:test_app/component/defaultSheet.dart';
 
 void RecordSheet(BuildContext context){
   showCustomDialog(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:test_app/screens/component/defaultTextField.dart';
-import 'package:test_app/screens/component/PetImg.dart';
-import 'package:test_app/screens/component/defaultButton.dart';
-import 'package:test_app/screens/component/defaultContainer.dart';
+import 'package:test_app/component/defaultTextField.dart';
+import 'package:test_app/component/PetImg.dart';
+import 'package:test_app/component/defaultButton.dart';
+import 'package:test_app/component/defaultContainer.dart';
 
 
 class AddPetForm extends StatefulWidget {

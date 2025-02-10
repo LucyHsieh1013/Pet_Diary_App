@@ -4,7 +4,7 @@ const { executeQuery } = require('../db');//資料庫函式
 const bcrypt = require('bcrypt');
 
 router.post('/', (req, res) => {
-    const {email, password} = req.body;
+    const {username, email, password} = req.body;
     
     const sql = "SELECT * FROM user WHERE email = ?";
     const params = [email];
@@ -27,8 +27,8 @@ router.post('/', (req, res) => {
         else{
             const hashedPassword = await bcrypt.hash(password, 10);//加密
 
-            const Isql = "INSERT INTO user (email, password) VALUES (?, ?)";
-            const Iparams = [email, hashedPassword];
+            const Isql = "INSERT INTO user (username, email, password) VALUES (?, ?, ?)";
+            const Iparams = [username, email, hashedPassword];
             executeQuery(Isql, Iparams, (error) =>{
                 if (error) {
                     console.error('資料庫錯誤:', error.message);
