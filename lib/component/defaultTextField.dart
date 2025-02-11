@@ -26,6 +26,7 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: TextFormField(
+        cursorColor: Colors.black,
         obscureText: obscureText,
         decoration: InputDecoration(
           hintText: hintText,
@@ -37,6 +38,14 @@ class CustomTextField extends StatelessWidget {
               borderRadius: BorderRadius.circular(30),
             )
             : UnderlineInputBorder(),
+          focusedBorder: haveborder
+            ? OutlineInputBorder(
+                borderRadius: BorderRadius.circular(30),
+                borderSide: BorderSide(color: Colors.black, width: 2), // 設定選取時的邊框顏色
+              )
+            : UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.black, width: 2), // 設定選取時的底線顏色
+              ),
           suffixIcon: suffixIcon,
           errorText: errorText,
         ),

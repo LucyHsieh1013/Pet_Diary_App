@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:test_app/services/Token.dart'; // 確保你已經正確導入 getToken
+import 'package:test_app/services/Token.dart';
 
 class UserProvider extends ChangeNotifier {
   // 預設值
@@ -13,7 +13,7 @@ class UserProvider extends ChangeNotifier {
   String get username => _username;
 
   // 重置
-  void resetUser() {
+  void reset() {
     _useremail = '無';
     _username = '使用者';
     notifyListeners(); // 通知 UI 更新

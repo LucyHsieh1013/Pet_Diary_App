@@ -3,11 +3,17 @@ import 'package:flutter/material.dart';
 class PetImage extends StatefulWidget {
   final String imgUrl;
   final bool Iconbutton;
+  final Color? iconColor;
+  final Color? backgroundColor;
+  final IconData defaultIcon;
 
   const PetImage({
     Key? key,
     required this.imgUrl,
     this.Iconbutton = false,
+    this.backgroundColor,
+    this.iconColor,
+    this.defaultIcon = Icons.pets,
   }) : super(key: key); 
 
   _ProfileImageUploaderState createState() => _ProfileImageUploaderState();
@@ -40,12 +46,12 @@ class _ProfileImageUploaderState extends State<PetImage> {
           // ),
           CircleAvatar(
             radius: 40,
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: widget.backgroundColor,
             backgroundImage: (imageUrl != null && imageUrl!.isNotEmpty)
               ? NetworkImage(imageUrl!) // 只有當 `imageUrl` 存在時才載入圖片
               : null, // 否則不顯示圖片
             child: (imageUrl == null || imageUrl!.isEmpty)
-              ? Icon(Icons.pets, color: Colors.white) // 預設圖示
+              ? Icon(widget.defaultIcon, color: widget.iconColor) // 預設圖示
               : null,
           ),
           Positioned(

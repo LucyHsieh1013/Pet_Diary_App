@@ -87,5 +87,34 @@ router.get('/user-profile', async (req, res) => {
     }
 });
 
+router.get('/pet-profile', async (req, res) => {
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) return res.status(401).json({ error: '未授權' });
+    try {
+        const decoded = jwt.verify(token, 'secretKey');
+        const id = decoded.id;
+
+        sql = "SELECT * FROM pet WHERE userid = ?";
+        params = [id];
+        executeQuery(sql, params, async(error, result) => {
+            if (error) {
+                console.error('資料庫錯誤:', error.message);
+                return res.status(500).json({
+                    success: false,
+                    message: '資料庫錯誤',
+                    error: error.message,
+                });
+            }
+            console.log('寵物查詢結果',result.length);
+            if (result.length > 0) {
+                return res.json({ haspet: true });
+            }else{
+                return res.json({ haspet: false });
+            }
+        })
+    }catch(error) {
+        res.status(403).json({ error: '無效的 Token' });
+    }
+})
 
 module.exports = router;

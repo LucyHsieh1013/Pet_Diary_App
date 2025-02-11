@@ -5,15 +5,17 @@ import 'package:test_app/services/Token.dart';
 import 'package:provider/provider.dart';
 import 'package:test_app/provider/UserInformation.dart';
 import 'package:test_app/services/provider.dart';
+import 'package:test_app/component/PetImg.dart';
 
 Drawer SettingDrawer(BuildContext context) {
   return Drawer(
     child: ListView(
-      padding: EdgeInsets.zero,
+      padding: EdgeInsets.zero, 
       children: <Widget>[
         UserAccountsDrawerHeader(
           decoration: BoxDecoration(
             color: const Color.fromARGB(255, 232, 176, 124),//導覽列背景顏色
+            border: const Border(bottom: BorderSide.none),
           ),
           accountName: Consumer<UserProvider>(
             builder: (context, userProvider, child){
@@ -27,9 +29,11 @@ Drawer SettingDrawer(BuildContext context) {
               return Text(userProvider.useremail);
             }
           ),
-          currentAccountPicture: CircleAvatar(
-            backgroundColor: Colors.white,
-            child: Icon(Icons.person, color: Colors.blue),
+          currentAccountPicture: PetImage(
+            imgUrl:'', 
+            backgroundColor: Theme.of(context).colorScheme.secondary, 
+            iconColor: Theme.of(context).colorScheme.primary,
+            defaultIcon: Icons.person,
           ),
         ),
         ListTile(

@@ -13,7 +13,7 @@ class AddPetPage extends StatelessWidget {
             height: 150,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: const Color.fromARGB(255, 232, 176, 124),
+              color: Theme.of(context).colorScheme.primary,
             ),
             child: Center(
               child: Column(

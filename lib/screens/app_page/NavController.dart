@@ -6,8 +6,10 @@ import 'package:test_app/screens/app_page/ExplorePage.dart';
 import 'package:test_app/screens/app_page/pet/AddPetPage.dart';
 import 'package:test_app/screens/app_page/appbar/AppBar.dart';
 import 'package:test_app/screens/app_page/appbar/SettingPage.dart';
+import 'package:provider/provider.dart';
+import 'package:test_app/provider/PetInformation.dart';
 
-// import 'package:test_app/screens/app_page/pet/PetPage.dart';
+import 'package:test_app/screens/app_page/pet/PetPage.dart';
 
 class NavController extends StatefulWidget {
   @override
@@ -17,17 +19,27 @@ class NavController extends StatefulWidget {
 class _NavController extends State<NavController> {
   int _currentIndex = 0; // 當前選中的頁面索引
 
-  final pages = [
-    AddPetPage(),// PetPage.dart
-    // PetPage(),//註冊寵物以後的頁面
-    ChartPage(), // ChartPage.dart
-    DiaryPage(), // DiaryPage.dart
-    CalendarPage(), // CalendarPage.dart
-    ExplorePage(),// ExplorePage.dart
-  ];
-
+  
   @override
   Widget build(BuildContext context) {
+    final petProvider = Provider.of<PetProvider>(context);
+
+    Widget petPage;
+    if (petProvider.haspet == null) {
+      petPage = Center(child: CircularProgressIndicator()); // 加載中
+    } else {
+      petPage = petProvider.haspet! ? PetPage() : AddPetPage();
+    }
+
+    final pages = [
+      petPage,
+      // AddPetPage(),// PetPage.dart
+      // PetPage(),//註冊寵物以後的頁面
+      ChartPage(), // ChartPage.dart
+      DiaryPage(), // DiaryPage.dart
+      CalendarPage(), // CalendarPage.dart
+      ExplorePage(),// ExplorePage.dart
+    ];
     return Scaffold(
       appBar: buildAppBar(context),// AppBar.dart
       endDrawer: SettingDrawer(context),
@@ -39,6 +51,7 @@ class _NavController extends State<NavController> {
             _currentIndex = index; // 更新索引
           });
         },
+        
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.pets),

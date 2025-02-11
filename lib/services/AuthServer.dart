@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:test_app/services/Token.dart';
 import 'package:test_app/services/provider.dart';//加載以及重置provider
+import 'package:test_app/screens/app_page/NavController.dart';
 
 class AuthService {
   static Future<void> connectToNode() async {
@@ -51,7 +52,8 @@ class AuthService {
         );
 
         loadAllProviders(context);//加載provider
-        Navigator.pushNamed(context, '/home'); // 跳轉到主畫面
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NavController()),); // 跳轉到主畫面
+        // Navigator.pushNamed(context, '/home'); // 跳轉到主畫面
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(data['message'] ?? '登入失敗')),

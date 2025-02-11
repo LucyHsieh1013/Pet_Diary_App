@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test_app/provider/UserInformation.dart';
+import 'package:test_app/provider/PetInformation.dart';
 
 import 'package:test_app/screens/login/LoginPage.dart';
 
@@ -10,15 +11,14 @@ import 'package:test_app/screens/login/VerificationPage.dart';
 import 'package:test_app/screens/login/ResetPasswd.dart';
 
 import 'package:test_app/screens/app_page/NavController.dart';
-// import 'package:test_app/screens/app_page/appbar/SettingPage.dart';
 import 'package:test_app/screens/app_page/pet/AddPetForm.dart';
-// import 'package:test_app/screens/app_page/pet/PetPage.dart';
 
 void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => UserProvider())
+        ChangeNotifierProvider(create: (context) => UserProvider()),
+        ChangeNotifierProvider(create: (context) => PetProvider()),
       ],
       child: MyApp(),
     )
@@ -39,16 +39,17 @@ class MyApp extends StatelessWidget {
         '/RequestRest': (context) => RequestRestScreen(),//忘記密碼
         '/Verification': (context) => VerificationScreen(),//忘記密碼-驗證碼
         '/Resetpasswd': (context) => ResetpasswdScreen(),//忘記密碼-重設密碼
-        // '/Setting': (context) => SettingPage(),//Appbar的設定
         '/Addform': (context) => AddPetForm(),
-        // '/Pet': (context) => PetPage(),
       },
 
       theme: ThemeData(
         primaryColor: Color.fromARGB(255, 232, 176, 124),
         brightness: Brightness.light,
         scaffoldBackgroundColor: Colors.white,
-
+        colorScheme: ColorScheme.light(
+          primary: Color.fromARGB(255, 232, 176, 124), // 主要顏色
+          secondary: Colors.white,
+        ),
         appBarTheme: AppBarTheme(
           backgroundColor: Color.fromARGB(255, 232, 176, 124),
           titleTextStyle: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),

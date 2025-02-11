@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/component/defaultContainer.dart';
 import 'package:test_app/component/PetImg.dart';
-
 class PetPage extends StatefulWidget{
   @override
   PetPageScreen createState() => PetPageScreen();
@@ -24,7 +23,11 @@ class PetPageScreen extends State<PetPage> {
                 children: [
                   Row(
                     children: [
-                      PetImage(imgUrl: ''),
+                      PetImage(
+                        imgUrl:'', 
+                        backgroundColor: Theme.of(context).colorScheme.secondary, 
+                        iconColor: Theme.of(context).colorScheme.primary,
+                      ),
                       SizedBox(width: 20,),
                       Text('寵物名',
                         style: TextStyle(

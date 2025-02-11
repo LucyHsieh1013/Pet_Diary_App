@@ -3,7 +3,7 @@ import 'package:test_app/component/defaultTextField.dart';
 import 'package:test_app/component/PetImg.dart';
 import 'package:test_app/component/defaultButton.dart';
 import 'package:test_app/component/defaultContainer.dart';
-
+// import 'package:test_app/screens/app_page/NavController.dart';
 
 class AddPetForm extends StatefulWidget {
   // const AddForm({super.key});
@@ -64,8 +64,11 @@ class AddPetFormState extends State<AddPetForm> {
               text: '確定',
               width: 120,
               onPressed: () {
-                Navigator.pushNamed(context, '/Pet');
+                Navigator.pop(context, true);
               },
+              // onPressed: () {
+              //   Navigator.pushNamed(context, '/Pet');
+              // },
             ),
           ],
         ),

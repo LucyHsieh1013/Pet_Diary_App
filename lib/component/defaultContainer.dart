@@ -5,7 +5,7 @@ class CustomContainer extends StatelessWidget {
   final double? height;
   final AlignmentGeometry alignment;
   final Widget? child;
-  final Color color;
+  final Color? color;
 
   const CustomContainer({
     Key? key,
@@ -13,7 +13,7 @@ class CustomContainer extends StatelessWidget {
     this.height,
     this.alignment = Alignment.center,
     this.child,
-    this.color = Colors.white,
+    this.color,
   }):super(key: key);
 
   @override
@@ -22,7 +22,7 @@ class CustomContainer extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: color,
+        color: color ?? Theme.of(context).primaryColor,
         borderRadius: BorderRadius.circular(20),
       ),
       alignment: alignment,
