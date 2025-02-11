@@ -3,10 +3,9 @@ import 'package:test_app/component/defaultTextField.dart';
 import 'package:test_app/component/PetImg.dart';
 import 'package:test_app/component/defaultButton.dart';
 import 'package:test_app/component/defaultContainer.dart';
-// import 'package:test_app/screens/app_page/NavController.dart';
+import 'package:test_app/services/AddPet.dart';
 
 class AddPetForm extends StatefulWidget {
-  // const AddForm({super.key});
 
   @override
   State<AddPetForm> createState() => AddPetFormState();
@@ -14,6 +13,11 @@ class AddPetForm extends StatefulWidget {
 
 class AddPetFormState extends State<AddPetForm> {
   final imageUrl = null;//存放圖片路徑
+  String name = '';
+  String variety = '';
+  String gender = '';
+  String birthday = '';
+  String date = '';
 
   @override
   Widget build(BuildContext context) {
@@ -40,35 +44,59 @@ class AddPetFormState extends State<AddPetForm> {
         child: Column(
           children: [
             PetImage(imgUrl:'',),
-            // CircleAvatar(
-            //   radius: 40,
-            //   backgroundColor: Theme.of(context).primaryColor,
-            //   backgroundImage: (imageUrl != null && imageUrl!.isNotEmpty)
-            //     ? NetworkImage(imageUrl!) // 只有當 `imageUrl` 存在時才載入圖片
-            //     : null, // 否則不顯示圖片
-            //   child: (imageUrl == null || imageUrl!.isEmpty)
-            //     ? Icon(Icons.pets, color: Colors.white) // 預設圖示
-            //     : null,
-            // ),
-            CustomTextField(hintText: '寵物名字', onChanged: (context){},),
+            CustomTextField(
+              hintText: '寵物名字', 
+              onChanged: (value){
+                setState(() {
+                  name = value;
+                });
+              },
+            ),
             SizedBox(height: 20),
-            CustomTextField(hintText: '品種', onChanged: (context){},),
+            CustomTextField(
+              hintText: '品種', 
+              onChanged: (value){
+                setState(() {
+                  variety = value;
+                });
+              },
+            ),
             SizedBox(height: 20),
-            CustomTextField(hintText: '性別', onChanged: (context){},),
+            CustomTextField(
+              hintText: '性別', 
+              onChanged: (value){
+                setState(() {
+                  gender = value;
+                });
+              },
+            ),
             SizedBox(height: 20),
-            CustomTextField(hintText: '生日', onChanged: (context){},),
+            CustomTextField(
+              hintText: '生日', 
+              onChanged: (value){
+                setState(() {
+                  birthday = value;
+                });
+              },
+            ),
             SizedBox(height: 20),
-            CustomTextField(hintText: '迎接家庭的日期', onChanged: (context){},),
+            CustomTextField(
+              hintText: '迎接家庭的日期', 
+              onChanged: (value){
+                setState(() {
+                  date = value;
+                });
+              },
+            ),
             SizedBox(height: 20),
             CustomButton(
               text: '確定',
               width: 120,
               onPressed: () {
-                Navigator.pop(context, true);
+                AddPet(context, name, variety, gender, birthday, date);
+                print('送出表單');
+                print(name);
               },
-              // onPressed: () {
-              //   Navigator.pushNamed(context, '/Pet');
-              // },
             ),
           ],
         ),
