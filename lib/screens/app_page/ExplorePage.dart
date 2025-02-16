@@ -11,14 +11,11 @@ class ExplorePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //分類標題
-                const Padding(
+                Padding(
                   padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
                   child: Text(
                     '消息分類',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: Theme.of(context).textTheme.titleLarge
                   ),
                 ),
                 //跳轉連結
@@ -69,18 +66,15 @@ class ExplorePage extends StatelessWidget {
                   ],
                 ),
                 //橫向卷軸標題
-                const Padding(
+                Padding(
                   padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
                   child: Text(
                     '最新消息',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: Theme.of(context).textTheme.titleLarge
                   ),
                 ),
                 //跳轉連結
-                const Padding(
+                Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                   child: Text(
                     '檢視',
@@ -111,7 +105,7 @@ class ExplorePage extends StatelessWidget {
                                 borderRadius: BorderRadius.all(Radius.circular(10)),
                               ),
                             ),
-                            const Padding(
+                            Padding(
                               padding: EdgeInsets.symmetric(vertical: 6),
                               child: Text(
                                 '消息',

@@ -75,7 +75,7 @@ class _NavController extends State<NavController> {
           ),
         ],
         type: BottomNavigationBarType.fixed, // 固定模式
-        selectedItemColor: Colors.blue, // 選中項目顏色
+        selectedItemColor: Theme.of(context).primaryColor, // 選中項目顏色
         unselectedItemColor: Colors.grey, // 未選中項目顏色
       ),
     );

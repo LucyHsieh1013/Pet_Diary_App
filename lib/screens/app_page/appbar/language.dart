@@ -18,7 +18,7 @@ void LanguageSheet(BuildContext context) {
               spacing: 8,
               children: [
                 RadioListTile<Language>(
-                  title: const Text('繁體中文'),
+                  title: Text('繁體中文', style: Theme.of(context).textTheme.bodyLarge),
                   value: Language.traditionalChinese,
                   groupValue: _language,
                   onChanged: (Language? value) {
@@ -28,7 +28,7 @@ void LanguageSheet(BuildContext context) {
                   },
                 ),
                 RadioListTile<Language>(
-                  title: const Text('简体中文'),
+                  title: Text('简体中文', style: Theme.of(context).textTheme.bodyLarge),
                   value: Language.simplifiedChinese,
                   groupValue: _language,
                   onChanged: (Language? value) {
@@ -38,7 +38,7 @@ void LanguageSheet(BuildContext context) {
                   },
                 ),
                 RadioListTile<Language>(
-                  title: const Text('English'),
+                  title: Text('English', style: Theme.of(context).textTheme.bodyLarge),
                   value: Language.english,
                   groupValue: _language,
                   onChanged: (Language? value) {

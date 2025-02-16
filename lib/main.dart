@@ -43,26 +43,26 @@ class MyApp extends StatelessWidget {
       },
 
       theme: ThemeData(
-        primaryColor: Color.fromARGB(255, 232, 176, 124),
+        primaryColor: Colors.blueGrey,
         brightness: Brightness.light,
         scaffoldBackgroundColor: Colors.white,
         colorScheme: ColorScheme.light(
-          primary: Color.fromARGB(255, 232, 176, 124), // 主要顏色
+          primary: Colors.blueGrey, // 主要顏色
           secondary: Colors.white,
         ),
         appBarTheme: AppBarTheme(
-          backgroundColor: Color.fromARGB(255, 232, 176, 124),
+          backgroundColor: Colors.blueGrey,
           titleTextStyle: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
           iconTheme: IconThemeData(color: Colors.white),
         ),
         textTheme: const TextTheme(
-          bodyLarge: TextStyle(fontSize: 18, color: Colors.black), // 主要文字樣式
-          bodyMedium: TextStyle(fontSize: 16, color: Colors.black),
-          titleLarge: TextStyle(fontSize: 22, fontWeight: FontWeight.bold), // 標題
+          bodyLarge: TextStyle(fontSize: 18, color: Colors.blueGrey), // 主要文字樣式
+          bodyMedium: TextStyle(fontSize: 16, color: Colors.white),
+          titleLarge: TextStyle(fontSize: 22, color: Colors.blueGrey, fontWeight: FontWeight.bold), // 標題
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Color.fromARGB(255, 232, 176, 124), // 按鈕背景顏色
+            backgroundColor: Colors.blueGrey, // 按鈕背景顏色
             foregroundColor: Colors.white, // 按鈕文字顏色
             // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)), // 圓角按鈕
           ),

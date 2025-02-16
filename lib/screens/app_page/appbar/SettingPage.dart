@@ -14,8 +14,7 @@ Drawer SettingDrawer(BuildContext context) {
       children: <Widget>[
         UserAccountsDrawerHeader(
           decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 232, 176, 124),//導覽列背景顏色
-            border: const Border(bottom: BorderSide.none),
+            color: Theme.of(context).primaryColor,//導覽列背景顏色
           ),
           accountName: Consumer<UserProvider>(
             builder: (context, userProvider, child){
@@ -37,29 +36,29 @@ Drawer SettingDrawer(BuildContext context) {
           ),
         ),
         ListTile(
-          leading:  Icon(Icons.article),
-          title: Text('修改密碼'),
+          leading:  Icon(Icons.article, color: Theme.of(context).colorScheme.primary),
+          title: Text('修改密碼', style: Theme.of(context).textTheme.bodyLarge),
           onTap: (){
             //
           },
         ),
         ListTile(
-          leading:  Icon(Icons.palette),
-          title: Text('主題'),
+          leading:  Icon(Icons.palette, color: Theme.of(context).colorScheme.primary),
+          title: Text('主題', style: Theme.of(context).textTheme.bodyLarge),
           onTap: (){
             ThemeSheet(context);
           },
         ),
         ListTile(
-          leading:  Icon(Icons.language),
-          title: Text('語言設定'),
+          leading:  Icon(Icons.language, color: Theme.of(context).colorScheme.primary),
+          title: Text('語言設定', style: Theme.of(context).textTheme.bodyLarge),
           onTap: (){
             LanguageSheet(context);
           },
         ),
         ListTile(
-          leading: Icon(Icons.exit_to_app),
-          title: Text('登出'),
+          leading: Icon(Icons.exit_to_app, color: Theme.of(context).colorScheme.primary),
+          title: Text('登出', style: Theme.of(context).textTheme.bodyLarge),
           onTap: () {
             showAlert(context);
           },
@@ -73,7 +72,7 @@ Future<void> showAlert(BuildContext context) async{
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        content: const Text('確定要登出嗎?'),
+        content: Text('確定要登出嗎?', style: Theme.of(context).textTheme.bodyLarge),
         actions: <Widget>[
           ElevatedButton(
             child: Text('確定'),

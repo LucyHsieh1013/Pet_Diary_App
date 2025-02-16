@@ -24,6 +24,7 @@ class RequestRest extends State<RequestRestScreen> {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 30,
+                    color: Colors.black,
                   ),
                 ),
               ),

@@ -30,20 +30,20 @@ void showCustomDialog(BuildContext context, String title, Widget body) {
                         Center( // 標題置中
                           child: Text(
                             title,
-                            style: const TextStyle(fontSize: 20),
+                            style: Theme.of(context).textTheme.titleLarge,
                           ),
                         ),
                         Positioned( // 右上角的關閉按鈕
                           right: 0,
                           child: IconButton(
-                            icon: const Icon(Icons.close, color: Colors.black),
+                            icon: Icon(Icons.close, color: Theme.of(context).colorScheme.primary),
                             onPressed: () => Navigator.pop(context),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  const Divider(), // 分隔線
+                  Divider(color: Theme.of(context).colorScheme.primary),
                   // 內容區 (超過最大高度才滾動)
                   Flexible(
                     child: SingleChildScrollView(

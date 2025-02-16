@@ -42,6 +42,7 @@ class RegisterPage extends State<RegisterScreen> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 30,
+                      color: Colors.black,
                     ),
                   ),
                 ),

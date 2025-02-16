@@ -65,7 +65,7 @@ class _ProfileImageUploaderState extends State<PetImage> {
                   // color: Colors.grey, // 上傳按鈕背景色
                 ),
                 padding: EdgeInsets.all(6),
-                child: Icon(Icons.camera_alt, color: Colors.black, size: 20),
+                child: Icon(Icons.camera_alt, color: Theme.of(context).colorScheme.primary, size: 20),
               ),
             ),
           ),

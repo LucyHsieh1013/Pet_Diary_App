@@ -54,7 +54,25 @@ class CalendarPageState extends State<CalendarPage> {
                   _focusedDay = focusedDay;
                 });
               },
+              headerStyle: HeaderStyle(
+                formatButtonVisible: false, // 隱藏格式切換按鈕（可選）
+                titleCentered: true, // 讓月份標題置中
+                titleTextStyle: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primary, // 修改月份標題的顏色
+                ),
+              ),
+              calendarStyle: CalendarStyle(
+                defaultTextStyle: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,//平日數字顏色
+                ),
+                weekendTextStyle: const TextStyle(
+                  color: Colors.red, // 週六日的數字顏色
+                ),
+              ),
               eventLoader: _getEventsForDay,
+              //星期的顏色
               calendarBuilders: CalendarBuilders(
                 dowBuilder: (context, day) {
                   final text = DateFormat.E().format(day);
@@ -64,7 +82,7 @@ class CalendarPageState extends State<CalendarPage> {
                       style: TextStyle(
                         color: day.weekday == DateTime.sunday || day.weekday == DateTime.saturday
                           ?Colors.red
-                          :Colors.black
+                          :Theme.of(context).colorScheme.primary,
                       ),
                     ),
                   );

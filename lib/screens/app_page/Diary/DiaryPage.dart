@@ -19,7 +19,7 @@ class DiaryScreen extends State<DiaryPage> {
               height: 150,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: const Color.fromARGB(255, 232, 176, 124),
+                color: Theme.of(context).primaryColor,
               ),
               child: Center(
                 child: Column(
@@ -32,7 +32,7 @@ class DiaryScreen extends State<DiaryPage> {
             ),
             SizedBox(height: 20),
             Container(
-              child: Text('尚無日記', style: TextStyle(fontSize: 20),),
+              child: Text('尚無日記', style: Theme.of(context).textTheme.titleLarge),
             )
           ],
         )
@@ -43,7 +43,7 @@ class DiaryScreen extends State<DiaryPage> {
         onPressed: (){
           FloatbtnFirst(context);
         },
-        backgroundColor: const Color.fromARGB(255, 232, 176, 124),
+        backgroundColor: Theme.of(context).primaryColor,
       ),
     );
   }

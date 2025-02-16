@@ -34,6 +34,7 @@ class Resetpasswd extends State<ResetpasswdScreen> {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 30,
+                    color: Colors.black,
                   ),
                 ),
               ),

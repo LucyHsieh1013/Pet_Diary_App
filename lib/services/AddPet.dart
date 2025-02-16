@@ -2,8 +2,10 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:test_app/services/Token.dart';
+import 'package:test_app/services/provider.dart';//加載以及重置provider
 
-void AddPet(BuildContext context, String name, String variety, String gender, String birthday, String date) async {
+
+void AddPet(BuildContext context, String name, String? variety, String? gender, String? birthday) async {
   String? token = await getToken();
   if (token == null) { return; }
   print('token: ${token}');
@@ -16,14 +18,14 @@ void AddPet(BuildContext context, String name, String variety, String gender, St
       'variety': variety,
       'gender': gender,
       'birthday': birthday,
-      'date': date,
     }),
   );
 
   final data = json.decode(response.body);
-  print('表單回傳: ${data}');
   if (response.statusCode == 200) {
     print('資料已成功傳送');
+    resetAllProviders(context);
+    loadAllProviders(context);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(data['message']))
     );

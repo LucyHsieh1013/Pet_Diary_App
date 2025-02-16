@@ -56,6 +56,7 @@ class Verification extends State<VerificationScreen> {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 30,
+                    color: Colors.black,
                   ),
                 ),
               ),
