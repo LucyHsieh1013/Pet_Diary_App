@@ -64,7 +64,6 @@ class MyApp extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.blueGrey, // 按鈕背景顏色
             foregroundColor: Colors.white, // 按鈕文字顏色
-            // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)), // 圓角按鈕
           ),
         ),
       ),

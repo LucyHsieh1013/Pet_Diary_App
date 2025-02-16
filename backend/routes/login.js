@@ -105,9 +105,9 @@ router.get('/pet-profile', async (req, res) => {
                     error: error.message,
                 });
             }
-            console.log('寵物查詢結果',result.length);
+            console.log('寵物查詢結果',result);
             if (result.length > 0) {
-                return res.json({ haspet: true });
+                return res.json({ haspet: true , result: result});
             }else{
                 return res.json({ haspet: false });
             }

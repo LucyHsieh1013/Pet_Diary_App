@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/component/defaultContainer.dart';
 import 'package:test_app/component/PetImg.dart';
+import 'package:test_app/provider/PetInformation.dart';
+import 'package:provider/provider.dart';
 class PetPage extends StatefulWidget{
   @override
   PetPageScreen createState() => PetPageScreen();
@@ -29,11 +31,16 @@ class PetPageScreen extends State<PetPage> {
                         iconColor: Theme.of(context).colorScheme.primary,
                       ),
                       SizedBox(width: 20,),
-                      Text('寵物名',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold
-                        ),
+                      Consumer<PetProvider>(
+                        builder: (context, petProvider, child) {
+                          return Text(
+                            petProvider.name,
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          );
+                        },
                       )
                     ],
                   ),
@@ -49,9 +56,33 @@ class PetPageScreen extends State<PetPage> {
                         children: [
                           Divider(height: 1, color: Theme.of(context).colorScheme.secondary),
                           SizedBox(height: 20),
-                          Text('性別:', style: Theme.of(context).textTheme.bodyMedium),
-                          Text('種類:', style: Theme.of(context).textTheme.bodyMedium),
-                          Text('生日:', style: Theme.of(context).textTheme.bodyMedium),
+                          Consumer<PetProvider>(
+                            builder: (context, petProvider, child) {
+                              return Text(
+                                '性別: ${petProvider.gender}',
+                                style: Theme.of(context).textTheme.bodyMedium
+                              );
+                            },
+                          ),
+                          Consumer<PetProvider>(
+                            builder: (context, petProvider, child) {
+                              return Text(
+                                '種類: ${petProvider.variety}',
+                                style: Theme.of(context).textTheme.bodyMedium
+                              );
+                            },
+                          ),
+                          Consumer<PetProvider>(
+                            builder: (context, petProvider, child) {
+                              return Text(
+                                '生日: ${petProvider.birthday}',
+                                style: Theme.of(context).textTheme.bodyMedium
+                              );
+                            },
+                          )
+                          // Text('性別:', style: Theme.of(context).textTheme.bodyMedium),
+                          // Text('種類:', style: Theme.of(context).textTheme.bodyMedium),
+                          // Text('生日:', style: Theme.of(context).textTheme.bodyMedium),
                         ],
                       )
                   ),
