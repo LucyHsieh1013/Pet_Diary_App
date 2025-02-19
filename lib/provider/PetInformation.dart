@@ -9,12 +9,15 @@ class PetProvider extends ChangeNotifier{
   String _variety = '載入中...';
   String _gender = '載入中...';
   String _birthday = '載入中...';
+  int _id = 0;
 
   bool? get haspet => _haspet;
   String get name => _name;
   String get variety => _variety;
   String get gender => _gender;
   String get birthday => _birthday;
+  int get id => _id;
+
 
   void reset() {
     _haspet = null;
@@ -44,7 +47,8 @@ class PetProvider extends ChangeNotifier{
         _variety = data['result'][0]['variety'];
         _gender = data['result'][0]['gender'];
         _birthday = data['result'][0]['birthday'];
-        print('前端: ${data['result'][0]['name']}');
+        _id = data['result'][0]['id'];
+        print('前端: ${data['result'][0]['id']}');
         notifyListeners();
       }
     } catch(e){

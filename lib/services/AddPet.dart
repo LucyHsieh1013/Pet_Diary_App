@@ -5,15 +5,17 @@ import 'package:test_app/services/Token.dart';
 import 'package:test_app/services/provider.dart';//加載以及重置provider
 
 
-void AddPet(BuildContext context, String name, String? variety, String? gender, String? birthday) async {
+void AddPet(BuildContext context, String route, String name, String? variety, String? gender, String? birthday, [int? id]) async {
   String? token = await getToken();
   if (token == null) { return; }
   print('token: ${token}');
+
   final response = await http.post(
     headers: {'Content-Type': 'application/json'},
-    Uri.parse('http://10.0.2.2:3000/form/addpet'),
+    Uri.parse('http://10.0.2.2:3000/form$route'),
     body: json.encode({
       'token': token,
+      'id': id,
       'name': name,
       'variety': variety,
       'gender': gender,

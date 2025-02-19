@@ -10,6 +10,7 @@ class CustomTextField extends StatelessWidget {
   final String? Function(String?)? validator; // 驗證函式
   final TextEditingController? controller;
   final double borderRadiusValue;
+  // final String? initialValue; // 新增 initialValue
 
   const CustomTextField({
     Key? key,
@@ -22,10 +23,13 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.controller,
     this.borderRadiusValue = 30.0,
+    // this.initialValue,
   }) :super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // TextEditingController _controller = controller ?? TextEditingController(text: initialValue);
+
     return Container(
       child: TextFormField(
         controller: controller,

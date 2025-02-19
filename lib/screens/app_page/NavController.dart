@@ -70,7 +70,7 @@ class _NavController extends State<NavController> {
             label: '日曆',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.apps),
+            icon: Icon(Icons.space_dashboard_rounded),
             label: '探索',
           ),
         ],

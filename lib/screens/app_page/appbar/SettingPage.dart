@@ -33,10 +33,11 @@ Drawer SettingDrawer(BuildContext context) {
             backgroundColor: Theme.of(context).colorScheme.secondary, 
             iconColor: Theme.of(context).colorScheme.primary,
             defaultIcon: Icons.person,
+            piciconColor: Theme.of(context).colorScheme.primary
           ),
         ),
         ListTile(
-          leading:  Icon(Icons.article, color: Theme.of(context).colorScheme.primary),
+          leading:  Icon(Icons.lock, color: Theme.of(context).colorScheme.primary),
           title: Text('修改密碼', style: Theme.of(context).textTheme.bodyLarge),
           onTap: (){
             //

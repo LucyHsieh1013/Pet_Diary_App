@@ -5,19 +5,48 @@ import 'package:test_app/component/defaultButton.dart';
 import 'package:test_app/component/defaultContainer.dart';
 import 'package:test_app/services/AddPet.dart';
 import 'package:intl/intl.dart'; 
-class AddPetForm extends StatefulWidget {
+import 'package:test_app/provider/PetInformation.dart';
+import 'package:provider/provider.dart';
 
+class AddPetForm extends StatefulWidget {
   @override
   State<AddPetForm> createState() => AddPetFormState();
 }
 
 class AddPetFormState extends State<AddPetForm> {
+  bool isEditing = false;  // 用來儲存 isEditing 狀態
   final imageUrl = null;//存放圖片路徑
-  String name = '';
-  String variety = '';
   String? gender;
-  String birthday = '';
+  int? petid;
   TextEditingController _birthdayController = TextEditingController();
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _varietyController = TextEditingController();
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // 接收從路由傳遞過來的參數
+    final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    if (args != null) {
+      isEditing = args['isEditing'] ?? false; // 設定 isEditing
+    }
+    if (isEditing) {
+      PetProvider petProvider = Provider.of<PetProvider>(context, listen: false);
+      petid = petProvider.id;
+      _nameController.text = petProvider.name;
+      _varietyController.text = petProvider.variety;
+      if(gender == null){
+        setState(() {
+          gender = petProvider.gender;
+        });
+      }
+      if(_birthdayController.text == ""){
+        setState(() {
+          _birthdayController.text = petProvider.birthday; // 預設生日
+        });
+      }
+    }
+  }
 
   // 格式化日期为 yyyy-MM-dd 格式
   String _formatDate(DateTime date) {
@@ -37,7 +66,8 @@ class AddPetFormState extends State<AddPetForm> {
     if (selectedDate != null) {
       // 将选择的日期格式化并显示在输入框中
       setState(() {
-        _birthdayController.text = _formatDate(selectedDate);
+        // _birthdayController.text = _formatDate(selectedDate);
+        _birthdayController.text = DateFormat('yyyy-MM-dd').format(selectedDate);
       });
     }
   }
@@ -46,7 +76,7 @@ class AddPetFormState extends State<AddPetForm> {
     return ScrollableScaffold(
       appBar: AppBar(
         title: Text(
-          '新增寵物資訊',
+          isEditing ? '編輯寵物資訊' : '新增寵物資訊',
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold
@@ -65,20 +95,21 @@ class AddPetFormState extends State<AddPetForm> {
         padding: const EdgeInsets.all(30),
         child: Column(
           children: [
-            PetImage(imgUrl:'',),
+            PetImage(
+              imgUrl:'',
+              piciconColor: Theme.of(context).colorScheme.secondary,
+              picIconbutton: true,
+            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start, // 讓標籤對齊左側
               children: [
                 Text('寵物名字'), // 標籤
                 CustomTextField(
                   hintText: '請輸入寵物名字', 
+                  controller: _nameController,
                   haveborder: true,
                   borderRadiusValue: 10,
-                  onChanged: (value) {
-                    setState(() {
-                      name = value;
-                    });
-                  },
+                  onChanged: (value) {},
                 ),
               ],
             ),
@@ -89,13 +120,10 @@ class AddPetFormState extends State<AddPetForm> {
                 Text('品種'), // 標籤
                 CustomTextField(
                   hintText: '品種', 
+                  controller: _varietyController,
                   haveborder: true,
                   borderRadiusValue: 10,
-                  onChanged: (value) {
-                    setState(() {
-                      name = value;
-                    });
-                  },
+                  onChanged: (value) {},
                 ),
               ],
             ),
@@ -114,15 +142,15 @@ class AddPetFormState extends State<AddPetForm> {
                   child: DropdownButton<String>(
                     value: gender,
                     isExpanded: true, // 讓選單填滿
-                    hint: Text('請選擇'),
+                    hint: Text('請選擇', style: Theme.of(context).textTheme.bodyLarge),
                     onChanged: (String? value) {
                       setState(() {
                         gender = value;
                       });
                     },
                     items: [
-                      DropdownMenuItem(value: '公', child: Text('公')),
-                      DropdownMenuItem(value: '母', child: Text('母')),
+                      DropdownMenuItem(value: '公', child: Text('公', style: Theme.of(context).textTheme.bodyLarge)),
+                      DropdownMenuItem(value: '母', child: Text('母', style: Theme.of(context).textTheme.bodyLarge)),
                     ],
                   ),
                 ),
@@ -138,13 +166,9 @@ class AddPetFormState extends State<AddPetForm> {
                   hintText: '請選擇生日',
                   haveborder: true,
                   borderRadiusValue: 10,
-                  onChanged: (value) {
-                    setState(() {
-                      birthday = value;
-                    });
-                  },
+                  onChanged: (value) {},
                   suffixIcon: IconButton(
-                    icon: Icon(Icons.calendar_today),
+                    icon: Icon(Icons.calendar_today, color: Theme.of(context).colorScheme.primary,),
                     onPressed: () {
                       selectDate(context);                    
                     },
@@ -157,9 +181,16 @@ class AddPetFormState extends State<AddPetForm> {
               text: '確定',
               width: 120,
               onPressed: () {
-                AddPet(context, name, variety, gender, birthday);
-                print('送出表單');
-                print(name);
+                print('petid: ${petid}');
+                AddPet(
+                  context,
+                  isEditing ? '/updatepet' : '/addpet',
+                  _nameController.text, // 直接從 Controller 取值
+                  _varietyController.text,
+                  gender,
+                  _birthdayController.text,
+                  petid,
+                );
               },
             ),
           ],
