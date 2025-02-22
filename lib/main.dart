@@ -10,6 +10,7 @@ import 'package:test_app/screens/login/RequestRest.dart';
 import 'package:test_app/screens/login/VerificationPage.dart';
 import 'package:test_app/screens/login/ResetPasswd.dart';
 
+import 'package:test_app/screens/app_page/Explore/Explorelist.dart';
 import 'package:test_app/screens/app_page/NavController.dart';
 import 'package:test_app/screens/app_page/pet/AddPetForm.dart';
 
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         '/Verification': (context) => VerificationScreen(),//忘記密碼-驗證碼
         '/Resetpasswd': (context) => ResetpasswdScreen(),//忘記密碼-重設密碼
         '/Addform': (context) => AddPetForm(),
+        '/Explore': (context) => Explorelist(),
       },
 
       theme: ThemeData(

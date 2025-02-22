@@ -139,19 +139,6 @@ router.post('/reset-password', (req, res) =>{
         }
         res.json({ message: "密碼更新成功" });
     })
-    // try{
-    //     const decoded =  jwt.verify(resettoken, secretKey);//驗證
-    //     const id = decoded.id
-    //     const email = decoded.email;    
-    //     console.log('修改資料:',id,email )
-    //     const hashedPassword = bcrypt.hashSync(newpassword, 10);
-
-        
-    // }catch (err) {
-    //     res.status(400).json({ 
-    //         message: "token無效或已過期"
-    //     });
-    // }
 });
     
 module.exports = router;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/screens/app_page/appbar/ThemeOption.dart';
 import 'package:test_app/screens/app_page/appbar/Language.dart';
+import 'package:test_app/screens/app_page/appbar/password.dart';
 import 'package:test_app/services/Token.dart';
 import 'package:provider/provider.dart';
 import 'package:test_app/provider/UserInformation.dart';
@@ -40,7 +41,7 @@ Drawer SettingDrawer(BuildContext context) {
           leading:  Icon(Icons.lock, color: Theme.of(context).colorScheme.primary),
           title: Text('修改密碼', style: Theme.of(context).textTheme.bodyLarge),
           onTap: (){
-            //
+            password(context);
           },
         ),
         ListTile(

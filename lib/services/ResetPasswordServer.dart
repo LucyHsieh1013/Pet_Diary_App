@@ -62,7 +62,8 @@ class ResetService {
 
   
   static Future<void> ResetPassword(BuildContext context, String newpassword) async{
-    print('newPassword: ${newpassword}');
+    print('newPassword: ${newpassword}, ${resettoken}');
+    
     final url = Uri.parse("http://10.0.2.2:3000/resetpassword/reset-password");
     final response = await http.post(
       url,

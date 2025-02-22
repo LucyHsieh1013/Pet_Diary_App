@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test_app/screens/app_page/ChartPage.dart';
 import 'package:test_app/screens/app_page/Diary/DiaryPage.dart';
 import 'package:test_app/screens/app_page/CalendarPage.dart';
-import 'package:test_app/screens/app_page/ExplorePage.dart';
+import 'package:test_app/screens/app_page/Explore/ExplorePage.dart';
 import 'package:test_app/screens/app_page/pet/AddPetPage.dart';
 import 'package:test_app/screens/app_page/appbar/AppBar.dart';
 import 'package:test_app/screens/app_page/appbar/SettingPage.dart';
