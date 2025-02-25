@@ -10,7 +10,7 @@ class CustomTextField extends StatelessWidget {
   final String? Function(String?)? validator; // 驗證函式
   final TextEditingController? controller;
   final double borderRadiusValue;
-  // final String? initialValue; // 新增 initialValue
+  final Color textColor;
 
   const CustomTextField({
     Key? key,
@@ -23,7 +23,7 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.controller,
     this.borderRadiusValue = 30.0,
-    // this.initialValue,
+    this.textColor = Colors.black,
   }) :super(key: key);
 
   @override
@@ -33,8 +33,9 @@ class CustomTextField extends StatelessWidget {
     return Container(
       child: TextFormField(
         controller: controller,
-        cursorColor: Colors.black,
+        cursorColor: textColor,
         obscureText: obscureText,
+        style: TextStyle(color: textColor),
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: TextStyle(

@@ -67,4 +67,35 @@ router.post('/updatepet', async (req, res) => {
         res.status(403).json({ error: '無效的 Token' });
     }
 })
+
+router.post('/updateuser', async (req, res) => {
+    const{token, username, email} = req.body
+    console.log('name:', username, email);
+    console.log('token:',token);
+    if (!token) return res.status(401).json({ error: '未授權' });
+    try {
+        const decoded = jwt.verify(token, 'secretKey');
+        const id = decoded.id;
+        console.log('userid:', id);
+
+        sql = "UPDATE user SET username = ?, email = ? WHERE id = ?";
+        params = [username, email, id];
+        executeQuery(sql, params, async(error, result) => {
+            if (error) {
+                console.error('資料庫錯誤:', error.message);
+                return res.status(500).json({
+                    success: false,
+                    message: '資料庫錯誤',
+                    error: error.message,
+                });
+            }
+            return res.status(200).json({
+                success: true,
+                message: '資料更新成功',
+            });
+        })
+    }catch(error) {
+        res.status(403).json({ error: '無效的 Token' });
+    }
+})
 module.exports = router;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/component/defaultTextField.dart';
-import 'package:test_app/component/PetImg.dart';
+import 'package:test_app/component/circleImage.dart';
 import 'package:test_app/component/defaultButton.dart';
 import 'package:test_app/component/defaultContainer.dart';
-import 'package:test_app/services/AddPet.dart';
+import 'package:test_app/services/Form.dart';
 import 'package:intl/intl.dart'; 
 import 'package:test_app/provider/PetInformation.dart';
 import 'package:provider/provider.dart';
@@ -95,15 +95,16 @@ class AddPetFormState extends State<AddPetForm> {
         padding: const EdgeInsets.all(30),
         child: Column(
           children: [
-            PetImage(
+            circleImage(
               imgUrl:'',
               piciconColor: Theme.of(context).colorScheme.secondary,
               picIconbutton: true,
             ),
+            SizedBox(height: 20),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start, // 讓標籤對齊左側
               children: [
-                Text('寵物名字'), // 標籤
+                Text('寵物名字', style: Theme.of(context).textTheme.bodyLarge), // 標籤
                 CustomTextField(
                   hintText: '請輸入寵物名字', 
                   controller: _nameController,
@@ -113,11 +114,11 @@ class AddPetFormState extends State<AddPetForm> {
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start, // 讓標籤對齊左側
               children: [
-                Text('品種'), // 標籤
+                Text('品種', style: Theme.of(context).textTheme.bodyLarge), // 標籤
                 CustomTextField(
                   hintText: '品種', 
                   controller: _varietyController,
@@ -127,11 +128,11 @@ class AddPetFormState extends State<AddPetForm> {
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start, // 讓標籤對齊左側
               children: [
-                Text('性別'), 
+                Text('性別', style: Theme.of(context).textTheme.bodyLarge), 
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
@@ -142,25 +143,25 @@ class AddPetFormState extends State<AddPetForm> {
                   child: DropdownButton<String>(
                     value: gender,
                     isExpanded: true, // 讓選單填滿
-                    hint: Text('請選擇', style: Theme.of(context).textTheme.bodyLarge),
+                    hint: Text('請選擇'),
                     onChanged: (String? value) {
                       setState(() {
                         gender = value;
                       });
                     },
                     items: [
-                      DropdownMenuItem(value: '公', child: Text('公', style: Theme.of(context).textTheme.bodyLarge)),
-                      DropdownMenuItem(value: '母', child: Text('母', style: Theme.of(context).textTheme.bodyLarge)),
+                      DropdownMenuItem(value: '公', child: Text('公')),
+                      DropdownMenuItem(value: '母', child: Text('母')),
                     ],
                   ),
                 ),
               )]
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start, // 讓標籤對齊左側
               children: [
-                Text('生日'),
+                Text('生日', style: Theme.of(context).textTheme.bodyLarge),
                 CustomTextField(
                   controller: _birthdayController,
                   hintText: '請選擇生日',
@@ -176,13 +177,13 @@ class AddPetFormState extends State<AddPetForm> {
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             CustomButton(
               text: '確定',
               width: 120,
               onPressed: () {
                 print('petid: ${petid}');
-                AddPet(
+                Petform(
                   context,
                   isEditing ? '/updatepet' : '/addpet',
                   _nameController.text, // 直接從 Controller 取值

@@ -10,6 +10,7 @@ import 'package:test_app/screens/login/RequestRest.dart';
 import 'package:test_app/screens/login/VerificationPage.dart';
 import 'package:test_app/screens/login/ResetPasswd.dart';
 
+import 'package:test_app/screens/app_page/appbar/UserData.dart';
 import 'package:test_app/screens/app_page/Explore/Explorelist.dart';
 import 'package:test_app/screens/app_page/Explore/StoreDetile.dart';
 import 'package:test_app/screens/app_page/NavController.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
         '/Addform': (context) => AddPetForm(),
         '/Explore': (context) => Explorelist(),
         '/Detile': (context) => StoreDetile(),
+        '/Updateform': (context) => UpdateUserData(),
       },
 
       theme: ThemeData(

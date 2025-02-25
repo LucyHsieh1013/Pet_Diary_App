@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/component/defaultContainer.dart';
-import 'package:test_app/component/PetImg.dart';
+import 'package:test_app/component/circleImage.dart';
 import 'package:test_app/provider/PetInformation.dart';
 import 'package:provider/provider.dart';
 class PetPage extends StatefulWidget{
@@ -27,7 +27,7 @@ class PetPageScreen extends State<PetPage> {
                   children: [
                     Row(
                       children: [
-                        PetImage(
+                        circleImage(
                           imgUrl: '', 
                           backgroundColor: Theme.of(context).colorScheme.secondary, 
                           iconColor: Theme.of(context).colorScheme.primary,

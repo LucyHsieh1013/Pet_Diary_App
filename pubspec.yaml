@@ -41,6 +41,7 @@ dependencies:
   flutter_progress_hud: ^2.0.2
   shared_preferences: ^2.5.1
   provider: ^6.1.2
+  fl_chart: ^0.63.0
 
 dev_dependencies:
   flutter_test:

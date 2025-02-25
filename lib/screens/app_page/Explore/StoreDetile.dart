@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/component/defaultContainer.dart'; // CustomContainer 在這裡定義
 // import 'package:test_app/component/defaultButton.dart';
-import 'package:test_app/component/PetImg.dart';
+import 'package:test_app/component/circleImage.dart';
 
 class StoreDetile extends StatefulWidget {
   @override
@@ -38,7 +38,7 @@ class _StoreDetileState extends State<StoreDetile> {
                     Column(
                       mainAxisSize: MainAxisSize.min,// 隨內文縮放高度
                       children: [
-                        PetImage(
+                        circleImage(
                           imgUrl: '', 
                           backgroundColor: Theme.of(context).colorScheme.secondary, 
                           iconColor: Theme.of(context).colorScheme.primary,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class PetImage extends StatefulWidget {
+class circleImage extends StatefulWidget {
   final String imgUrl;
   final bool Iconbutton;
   final Color? iconColor;
@@ -9,7 +9,7 @@ class PetImage extends StatefulWidget {
   final Color? backgroundColor;
   final IconData defaultIcon;
 
-  const PetImage({
+  const circleImage({
     Key? key,
     required this.imgUrl,
     this.Iconbutton = false,
@@ -22,7 +22,7 @@ class PetImage extends StatefulWidget {
 
   _ProfileImageUploaderState createState() => _ProfileImageUploaderState();
 }
-class _ProfileImageUploaderState extends State<PetImage> {
+class _ProfileImageUploaderState extends State<circleImage> {
   // File? _imageFile;
 
   // Future<void> _pickImage() async {
