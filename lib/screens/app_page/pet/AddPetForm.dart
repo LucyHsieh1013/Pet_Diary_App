@@ -8,12 +8,23 @@ import 'package:intl/intl.dart';
 import 'package:test_app/provider/PetInformation.dart';
 import 'package:provider/provider.dart';
 
+import 'package:test_app/component/selectPicture.dart'; // 引入 ImagePickerWidget
+import 'dart:io';
+
 class AddPetForm extends StatefulWidget {
   @override
   State<AddPetForm> createState() => AddPetFormState();
 }
 
 class AddPetFormState extends State<AddPetForm> {
+  File? _selectedImage;
+  // 當選擇相片或拍照時，更新圖片
+  void _onImageSelected(File? image) {
+    setState(() {
+      _selectedImage = image;
+    });
+  }
+
   bool isEditing = false;  // 用來儲存 isEditing 狀態
   final imageUrl = null;//存放圖片路徑
   String? gender;
@@ -98,8 +109,19 @@ class AddPetFormState extends State<AddPetForm> {
             circleImage(
               imgUrl:'',
               piciconColor: Theme.of(context).colorScheme.secondary,
-              picIconbutton: true,
+              // picIconbutton: true,
             ),
+            ImagePickerWidget(onImageSelected: _onImageSelected),
+            if (_selectedImage != null)
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.file(
+                  _selectedImage!,
+                  width: 200,
+                  height: 200,
+                  fit: BoxFit.cover,
+                ),
+              ),
             SizedBox(height: 20),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start, // 讓標籤對齊左側

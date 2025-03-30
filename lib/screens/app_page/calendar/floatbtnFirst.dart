@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/screens/app_page/Diary/recordSheet.dart';
 import 'package:test_app/component/defaultButton.dart';
-
+// import 'package:test_app/screens/app_page/calendar/Addevent.dart';
 void FloatbtnFirst(BuildContext context){
     showModalBottomSheet(
       context: context,
@@ -12,6 +12,15 @@ void FloatbtnFirst(BuildContext context){
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
+              ListTile(
+                leading: Icon(Icons.push_pin_outlined, color: Theme.of(context).colorScheme.primary,),
+                title: Text('新增代辦事項', style: Theme.of(context).textTheme.bodyLarge),
+                onTap: (){
+                  //每日記錄頁面
+                  Navigator.pop(context);
+                },
+              ),
+              Divider(color: Theme.of(context).colorScheme.primary),
               ListTile(
                 leading: Icon(Icons.article, color: Theme.of(context).colorScheme.primary,),
                 title: Text('每日記錄', style: Theme.of(context).textTheme.bodyLarge),
@@ -26,6 +35,7 @@ void FloatbtnFirst(BuildContext context){
                 leading: Icon(Icons.edit, color: Theme.of(context).colorScheme.primary),
                 title: Text('日記', style: Theme.of(context).textTheme.bodyLarge),
                 onTap: (){
+                  Navigator.of(context, rootNavigator: true).pushNamed('/AddDiary');
                   //日記頁面
                 },
               ),

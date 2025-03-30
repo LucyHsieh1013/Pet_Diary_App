@@ -10,6 +10,11 @@ import 'package:test_app/screens/login/RequestRest.dart';
 import 'package:test_app/screens/login/VerificationPage.dart';
 import 'package:test_app/screens/login/ResetPasswd.dart';
 
+
+// import 'package:test_app/screens/app_page/Diary/recordSheet.dart';
+import 'package:test_app/screens/app_page/Diary/AddRecord.dart';
+import 'package:test_app/screens/app_page/Diary/Adddiary.dart';
+
 import 'package:test_app/screens/app_page/appbar/UserData.dart';
 import 'package:test_app/screens/app_page/Explore/Explorelist.dart';
 import 'package:test_app/screens/app_page/Explore/StoreDetile.dart';
@@ -46,6 +51,9 @@ class MyApp extends StatelessWidget {
         '/Explore': (context) => Explorelist(),
         '/Detile': (context) => StoreDetile(),
         '/Updateform': (context) => UpdateUserData(),
+        // '/recordSheet': (context) => RecordSheet(),
+        '/Addrecord': (context) => AddRecord(),
+        '/AddDiary': (context) => AddDiary(),
       },
 
       theme: ThemeData(
@@ -55,6 +63,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.light(
           primary: Colors.blueGrey, // 主要顏色
           secondary: Colors.white,
+          tertiary: const Color.fromARGB(255, 186, 220, 237),
         ),
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.blueGrey,
