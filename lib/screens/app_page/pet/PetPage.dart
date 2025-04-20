@@ -3,6 +3,8 @@ import 'package:test_app/component/defaultContainer.dart';
 import 'package:test_app/component/circleImage.dart';
 import 'package:test_app/provider/PetInformation.dart';
 import 'package:provider/provider.dart';
+import 'package:test_app/screens/app_page/Pet/floatbtnFirst.dart';
+
 class PetPage extends StatefulWidget{
   @override
   PetPageScreen createState() => PetPageScreen();
@@ -215,7 +217,16 @@ class PetPageScreen extends State<PetPage> {
             )
           ),
         ],
-      )
+      ),
+      
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add, color: Theme.of(context).colorScheme.primary),
+        onPressed: (){
+          FloatbtnFirst(context); //底部跳出視窗(日記、數據紀錄)
+        },
+        backgroundColor: Theme.of(context).colorScheme.tertiary,
+      ),
     );
+    
   }
 }

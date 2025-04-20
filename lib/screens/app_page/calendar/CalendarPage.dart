@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'dart:convert'; // 用來處理 JSON 編碼和解碼
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';//存在本地端
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({super.key});
@@ -218,8 +218,7 @@ class CalendarPageState extends State<CalendarPage> {
                 child: ElevatedButton.icon(
                   onPressed: () => _showAddEventDialog(today),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        Theme.of(context).colorScheme.tertiary,
+                    backgroundColor:Theme.of(context).colorScheme.tertiary,
                     elevation: 5,
                     shadowColor: Colors.black45,
                     shape: RoundedRectangleBorder(

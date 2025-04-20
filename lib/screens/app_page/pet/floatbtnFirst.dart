@@ -13,15 +13,6 @@ void FloatbtnFirst(BuildContext context){
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
-                leading: Icon(Icons.push_pin_outlined, color: Theme.of(context).colorScheme.primary,),
-                title: Text('新增代辦事項', style: Theme.of(context).textTheme.bodyLarge),
-                onTap: (){
-                  //每日記錄頁面
-                  Navigator.pop(context);
-                },
-              ),
-              Divider(color: Theme.of(context).colorScheme.primary),
-              ListTile(
                 leading: Icon(Icons.article, color: Theme.of(context).colorScheme.primary,),
                 title: Text('每日記錄', style: Theme.of(context).textTheme.bodyLarge),
                 onTap: (){
