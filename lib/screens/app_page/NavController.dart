@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/screens/app_page/ChartPage.dart';
-import 'package:test_app/screens/app_page/Diary/DiaryPage.dart';
+import 'package:test_app/screens/app_page/Diary/ChatPage.dart';
 import 'package:test_app/screens/app_page/calendar/CalendarPage.dart';
 import 'package:test_app/screens/app_page/Explore/ExplorePage.dart';
 import 'package:test_app/screens/app_page/pet/AddPetPage.dart';
@@ -36,7 +36,7 @@ class _NavController extends State<NavController> {
       // AddPetPage(),// PetPage.dart
       // PetPage(),//註冊寵物以後的頁面
       ChartPage(), // ChartPage.dart
-      DiaryPage(), // DiaryPage.dart
+      ChatPage(), // DiaryPage.dart
       CalendarPage(), // CalendarPage.dart
       ExplorePage(),// ExplorePage.dart
     ];
@@ -62,8 +62,8 @@ class _NavController extends State<NavController> {
             label: '圖表',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.book),
-            label: '日記',
+            icon: Icon(Icons.chat_bubble),
+            label: '情緒辨識',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_today),
