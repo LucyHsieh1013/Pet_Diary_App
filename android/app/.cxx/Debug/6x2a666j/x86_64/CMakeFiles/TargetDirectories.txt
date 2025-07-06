@@ -1,0 +1,2 @@
+D:/desktop/pet_hospital/pet hospital_app/Pet_Diary_App/android/app/.cxx/Debug/6x2a666j/x86_64/CMakeFiles/edit_cache.dir
+D:/desktop/pet_hospital/pet hospital_app/Pet_Diary_App/android/app/.cxx/Debug/6x2a666j/x86_64/CMakeFiles/rebuild_cache.dir
