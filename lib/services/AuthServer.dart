@@ -6,7 +6,6 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:test_app/services/Token.dart';
 import 'package:test_app/services/provider.dart'; //加載以及重置provider
 import 'package:test_app/screens/app_page/NavController.dart';
-import 'dart:convert';
 
 class AuthService {
   static Map<String, dynamic> _parseJwt(String token) {

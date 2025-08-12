@@ -1,6 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
 import 'package:test_app/screens/app_page/Diary/message.dart';
 
 class ChatPage extends StatefulWidget {
@@ -11,11 +14,54 @@ class ChatPage extends StatefulWidget {
 class ChatScreen extends State<ChatPage> {
   final List<Message> _messages = [];
   final TextEditingController _controller = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
+  final ImagePicker _picker = ImagePicker();
+  XFile? _image;
 
   @override
   void initState() {
     super.initState();
     loadMessages();
+  }
+
+  Future<void> pickImage() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _image = pickedFile;
+      });
+    }
+  }
+
+  Future<void> uploadImage() async {
+    if (_image == null) return;
+
+    var request = http.MultipartRequest(
+      'POST',
+      Uri.parse('http://10.0.2.2:3000/upload'),
+    );
+    request.files.add(await http.MultipartFile.fromPath('image', _image!.path));
+
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      final respStr = await response.stream.bytesToString();
+      print('伺服器回應: $respStr');
+    } else {
+      print('上傳失敗，狀態碼: ${response.statusCode}');
+    }
+  }
+
+  void _scrollToBottom() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_scrollController.hasClients) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.easeOut,
+        );
+      }
+    });
   }
 
   void _sendMessage() {
@@ -27,8 +73,51 @@ class ChatScreen extends State<ChatPage> {
       });
       _controller.clear();
       saveMessages();
+      _scrollToBottom();
     }
   }
+
+  Future<void> _sendImageMessage() async {
+  final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+  if (pickedFile != null) {
+    setState(() {
+      _image = pickedFile;
+      _messages.add(Message(text: '', imagePath: _image!.path, isUser: true));
+
+      _messages.add(Message(text: '正在分析中...', isUser: false));
+    });
+
+    _scrollToBottom();
+
+    var request = http.MultipartRequest(
+      'POST',
+      Uri.parse('http://10.0.2.2:3000/upload'),
+    );
+    request.files.add(await http.MultipartFile.fromPath('image', _image!.path));
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      final respStr = await response.stream.bytesToString();
+      print('伺服器回應原始字串: $respStr');
+
+      try {
+        final jsonResponse = json.decode(respStr);
+        final replyText = jsonResponse['generated_text']?.toString() ?? '無回覆';
+
+        setState(() {
+          _messages[_messages.length - 1] = Message(text: replyText, isUser: false);
+        });
+
+        saveMessages();
+        _scrollToBottom();
+      } catch (e) {
+        print('JSON 解析錯誤: $e');
+      }
+    } else {
+      print('上傳失敗，狀態碼: ${response.statusCode}');
+    }
+  }
+}
 
   Future<void> saveMessages() async {
     final prefs = await SharedPreferences.getInstance();
@@ -45,6 +134,7 @@ class ChatScreen extends State<ChatPage> {
           .map((msgStr) => Message.fromJson(jsonDecode(msgStr)))
           .toList());
     });
+    _scrollToBottom();
   }
 
   @override
@@ -54,7 +144,8 @@ class ChatScreen extends State<ChatPage> {
         children: [
           Expanded(
             child: ListView.builder(
-              padding: const EdgeInsets.all(10),
+              controller: _scrollController,
+              padding: const EdgeInsets.all(0),
               itemCount: _messages.length,
               itemBuilder: (context, index) {
                 final message = _messages[index];
@@ -70,17 +161,19 @@ class ChatScreen extends State<ChatPage> {
                   crossAxisAlignment: alignment,
                   children: [
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 4, horizontal: 8),
+                      padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: bubbleColor,
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child: Text(
-                        message.text,
-                        style: TextStyle(color: textColor),
-                      ),
+                      child: message.imagePath != null
+                          ? Image.file(File(message.imagePath!))
+                          : Text(
+                              message.text,
+                              style: TextStyle(color: textColor),
+                            ),
                     ),
                   ],
                 );
@@ -88,9 +181,14 @@ class ChatScreen extends State<ChatPage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
             child: Row(
               children: [
+                IconButton(
+                  icon: Icon(Icons.photo, color: Colors.black),
+                  onPressed: _sendImageMessage,
+                ),
                 Expanded(
                   child: TextField(
                     controller: _controller,

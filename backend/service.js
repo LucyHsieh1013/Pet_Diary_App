@@ -5,6 +5,8 @@ const registerRoute = require('./routes/register');
 const resetpasswordRoute = require('./routes/resetpassword');
 const formRoute = require('./routes/form');
 const googleRoute = require('./routes/google');
+const llamaRouter = require("./routes/llama");
+const cors = require("cors");
 
 const { executeQuery } = require('./db');//資料庫函式
 
@@ -13,6 +15,7 @@ const port = 3000
 
 app.use(bodyParser.json());
 
+app.use("/upload", llamaRouter);
 app.use('/login', loginRoute);
 app.use('/register', registerRoute);
 app.use('/resetpassword', resetpasswordRoute);

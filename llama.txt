@@ -1,0 +1,88 @@
+import torch
+from transformers import pipeline
+from ultralytics import YOLO
+import cv2
+import faiss
+import pandas as pd
+from sentence_transformers import SentenceTransformer
+import os
+import sys
+import json
+
+model_path = os.path.join(os.path.dirname(__file__), "runs", "detect", "train3", "weights", "best.pt")
+yolo_model = YOLO(model_path)
+
+# --- YOLO模型辨識 ---
+# yolo_model = YOLO("./runs/detect/train3/weights/best.pt")
+# img = cv2.imread("angrytest.png")
+if len(sys.argv) < 2:
+    print("請提供圖片路徑")
+    sys.exit(1)
+
+img_path = sys.argv[1]
+
+# 讀圖片
+img = cv2.imread(img_path)
+if img is None:
+    print(f"找不到圖片: {img_path}", file=sys.stderr)
+    sys.exit(1)
+results = yolo_model(img)
+
+label = None
+for r in results:
+    for box in r.boxes:
+        label = r.names[int(box.cls)]
+
+# --- RAG向量資料庫設定 ---
+# 1. 讀RAG資料庫
+# df = pd.read_excel('./cat_rag.xlsx')
+base_dir = os.path.dirname(__file__)
+excel_path = os.path.join(base_dir, 'cat_rag.xlsx')
+
+df = pd.read_excel(excel_path)
+texts = (df['question'] + " " + df['answer']).tolist()
+
+# 2. 讀向量資料庫
+# index = faiss.read_index('./cat_rag.index')
+base_dir = os.path.dirname(__file__)
+index_path = os.path.join(base_dir, 'cat_rag.index')
+
+index = faiss.read_index(index_path)
+
+# 3. 讀同一個句向量模型
+embed_model = SentenceTransformer('sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2')
+
+# 4. 把 YOLO 的 label 當成查詢關鍵字
+query = "貓咪的情緒是" + label + "，該怎麼辦？"
+query_vec = embed_model.encode([query])
+
+# 5. 搜尋最近5筆
+D, I = index.search(query_vec, k=5)
+retrieved_context = "\n".join(texts[idx] for idx in I[0])
+
+# --- LLaMA 文字生成 ---
+model_id = "meta-llama/Llama-3.2-3B-Instruct"
+pipe = pipeline(
+    "text-generation",
+    model=model_id,
+    torch_dtype=torch.bfloat16,
+    device_map="auto",
+)
+
+# 把RAG查到的資料加入提示
+messages = [
+    {"role": "system", "content": "你是一個可以協助飼主回復關於貓咪情緒以及日常行為的AI助手(Meowmemo)，會用口語化方式回答,不要有奇怪的狀聲詞,只回覆繁體中文。關於貓咪情緒的問題，你要先回覆: 你的貓咪目前處於「什麼情緒」，應該如何解決"},
+    {"role": "user", "content": f"我的貓咪的情緒看起來是{label}。以下是相關資料：{retrieved_context}。請幫我分析原因並給建議。"},
+]
+
+# 產生回應
+outputs = pipe(
+    messages,
+    max_new_tokens=256,
+)
+
+# 顯示回應
+result_text = outputs[0]["generated_text"]
+print(json.dumps({"generated_text": result_text}, ensure_ascii=False))
+sys.stdout.flush()
+# print(outputs[0]["generated_text"])   
