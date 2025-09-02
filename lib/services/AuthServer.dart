@@ -6,6 +6,7 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:test_app/services/Token.dart';
 import 'package:test_app/services/provider.dart'; //加載以及重置provider
 import 'package:test_app/screens/app_page/NavController.dart';
+import 'package:test_app/services/base_url.dart';
 
 class AuthService {
   static Map<String, dynamic> _parseJwt(String token) {
@@ -21,7 +22,7 @@ class AuthService {
 
   static Future<void> connectToNode() async {
     try {
-      final response = await http.get(Uri.parse('http://10.0.2.2:3000'));
+      final response = await http.get(Uri.parse('$BASE_URL'));
       if (response.statusCode == 200) {
         print('Response from Node.js: ${response.body}');
       } else {
@@ -42,7 +43,7 @@ class AuthService {
 
     try {
       final response = await http.post(
-        Uri.parse('http://10.0.2.2:3000/login'),
+        Uri.parse('$BASE_URL/login'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({'email': email, 'password': password}),
       );
@@ -92,7 +93,7 @@ class AuthService {
   ) async {
     try {
       final response = await http.post(
-        Uri.parse('http://10.0.2.2:3000/register'),
+        Uri.parse('$BASE_URL/register'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'username': username,
@@ -150,7 +151,7 @@ class AuthService {
       debugPrint('▶ idToken payload: $payload');
 
       final response = await http.post(
-        Uri.parse('http://10.0.2.2:3000/auth/google'),
+        Uri.parse('$BASE_URL/auth/google'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({'idToken': idToken}),
       );

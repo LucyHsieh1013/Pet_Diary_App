@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:test_app/services/Token.dart';
+import 'package:test_app/services/base_url.dart';
 
 class UserProvider extends ChangeNotifier {
   // 預設值
@@ -32,7 +33,7 @@ class UserProvider extends ChangeNotifier {
       }
 
       final response = await http.get(
-        Uri.parse('http://10.0.2.2:3000/login/user-profile'),
+        Uri.parse('$BASE_URL/login/user-profile'),
         headers: {'Authorization': 'Bearer $token'}
       );
 

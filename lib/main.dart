@@ -21,7 +21,11 @@ import 'package:test_app/screens/app_page/Explore/StoreDetile.dart';
 import 'package:test_app/screens/app_page/NavController.dart';
 import 'package:test_app/screens/app_page/pet/AddPetForm.dart';
 
-void main() {
+import 'package:test_app/services/base_url.dart';
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized(); // 確保能做異步初始化
+  await initBaseUrl();
   runApp(
     MultiProvider(
       providers: [

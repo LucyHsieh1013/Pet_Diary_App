@@ -1,13 +1,14 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:test_app/services/base_url.dart';
 
 class ResetService {
   static String? token;
   static String? resettoken;
   //請求驗證碼
   static Future<void> requestPasswordReset(BuildContext context, String email) async{
-    final url = Uri.parse("http://10.0.2.2:3000/resetpassword/request-reset");
+    final url = Uri.parse("$BASE_URL/resetpassword/request-reset");
     final response = await http.post(
       url,
       headers:{"Content-Type": "application/json"},
@@ -38,7 +39,7 @@ class ResetService {
     }
     print('及時驗證token: ${token}');
 
-    final url = Uri.parse("http://10.0.2.2:3000/resetpassword/verify-code");
+    final url = Uri.parse("$BASE_URL/resetpassword/verify-code");
     final response = await http.post(
       url,
       headers:{"Content-Type": "application/json"},
@@ -64,7 +65,7 @@ class ResetService {
   static Future<void> ResetPassword(BuildContext context, String newpassword) async{
     print('newPassword: ${newpassword}, ${resettoken}');
     
-    final url = Uri.parse("http://10.0.2.2:3000/resetpassword/reset-password");
+    final url = Uri.parse("$BASE_URL/resetpassword/reset-password");
     final response = await http.post(
       url,
       headers:{"Content-Type": "application/json"},

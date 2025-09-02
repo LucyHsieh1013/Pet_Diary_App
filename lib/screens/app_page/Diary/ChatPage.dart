@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:test_app/screens/app_page/Diary/message.dart';
+import 'package:test_app/services/base_url.dart';
 
 class ChatPage extends StatefulWidget {
   @override
@@ -38,7 +39,7 @@ class ChatScreen extends State<ChatPage> {
 
     var request = http.MultipartRequest(
       'POST',
-      Uri.parse('http://10.0.2.2:3000/upload'),
+      Uri.parse('$BASE_URL/upload'),
     );
     request.files.add(await http.MultipartFile.fromPath('image', _image!.path));
 
@@ -91,7 +92,7 @@ class ChatScreen extends State<ChatPage> {
 
     var request = http.MultipartRequest(
       'POST',
-      Uri.parse('http://10.0.2.2:3000/upload'),
+      Uri.parse('$BASE_URL/upload'),
     );
     request.files.add(await http.MultipartFile.fromPath('image', _image!.path));
     var response = await request.send();

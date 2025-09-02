@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:test_app/services/Token.dart';
+import 'package:test_app/services/base_url.dart';
 
 class PetProvider extends ChangeNotifier{
   bool? _haspet;
@@ -37,7 +38,7 @@ class PetProvider extends ChangeNotifier{
       }
 
       final response = await http.get(
-        Uri.parse('http://10.0.2.2:3000/login/pet-profile'),
+        Uri.parse('$BASE_URL/login/pet-profile'),
         headers: {'Authorization': 'Bearer $token'}
       );
       if (response.statusCode == 200) {

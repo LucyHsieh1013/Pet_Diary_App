@@ -4,8 +4,6 @@ const { executeQuery } = require('../db');
 // const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const secretKey = '80a1c66e79443f97989d40933dab1721ac66b3838c88383f23f3525b71d2ca5a3058c7addcdf';
-
 router.post('/addpet', async (req, res) => {
     const{token, name, variety, gender, birthday} = req.body
     console.log('name:', name, variety, gender, birthday);

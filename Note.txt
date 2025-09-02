@@ -1,3 +1,11 @@
+後端執行位置:
+    在backend/.env設定，如果.env未宣告在server.js內預設為http://localhost:3000
+    如果要用區域網方式連線，在backend/.env設定，用Ipconfig看IPv4，在HOST位址填入192.168.X.X
+前端連線到後端:
+    如果要用區域網方式連線，在.env.client設定，與 backend/.env 內的HOST相同
+    base_url.dart內會判斷裝置，預設一般為http://localhost:3000，而android模擬器預設為http://10.0.2.2:3000
+    如果要連線到後端要使用import 'package:test_app/services/base_url.dart';
+    Uri.parse('$BASE_URL/xxx/xxx')
 登入:
     前端驗證:
         格式錯誤的即時顯示
@@ -5,6 +13,7 @@
     後端驗證:
         抓出資料庫整筆用戶資料，先檢查帳號是否存在，再比對密碼是否正確
     token:
+        jwt的加密為'secretKey'並非亂碼加密(與未登入修改密碼不同)
         login.js配發登入token
         LoginServer.dart接收token並呼叫token.dart將token儲存至本地端(使用shared_preferences)
 登出:
@@ -12,6 +21,8 @@
         登出按鈕在SettingPage.dart，登出時刪除token
         
 未登入修改密碼:
+    jwt的加密為'80a1c66e79443f97989d40933dab1721ac66b3838c88383f23f3525b71d2ca5a3058c7addcdf'亂碼加密
+    必須在學校的局域網，如果在校外必須使用VPN
     送出email後會配發一組驗證碼，驗證碼送出後會配發token用作密碼修改
 
 Provider: 用於讓同個物件不會因為切換畫面而一直重複加載

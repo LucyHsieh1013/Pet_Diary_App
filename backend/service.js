@@ -11,7 +11,18 @@ const cors = require("cors");
 const { executeQuery } = require('./db');//資料庫函式
 
 const app = express()
-const port = 3000
+require('dotenv').config();
+const port = process.env.PORT ?? 3000;
+const host = process.env.HOST ?? '0.0.0.0';
+console.log('host:', host);
+app.use(cors({
+  // 允許 http://localhost:任意埠 / 127.0.0.1:任意埠
+  origin: [/^http:\/\/localhost:\d+$/, /^http:\/\/127\.0\.0\.1:\d+$/],
+  credentials: true, // 若用 cookie/會話需要；不用可關
+  methods: ['GET','POST','PUT','DELETE','OPTIONS'],
+  allowedHeaders: ['Content-Type','Authorization'],
+}));
+app.options('*', cors());
 
 app.use(bodyParser.json());
 
@@ -22,10 +33,10 @@ app.use('/resetpassword', resetpasswordRoute);
 app.use('/form', formRoute);
 app.use('/auth', googleRoute);
 
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`)
-})
-
+app.listen(port, host, () => {
+  const shown = host === '0.0.0.0' ? 'localhost' : host;
+  console.log(`Server running at http://${shown}:${port}`);
+});
 
 //測試用
 app.get('/user', (req, res) => {

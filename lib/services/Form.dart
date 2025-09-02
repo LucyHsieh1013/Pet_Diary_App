@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:test_app/services/Token.dart';
 import 'package:test_app/services/provider.dart';//加載以及重置provider
+import 'package:test_app/services/base_url.dart';
 
 
 void Petform(BuildContext context, String route, String name, String? variety, String? gender, String? birthday, [int? id]) async {
@@ -12,7 +13,7 @@ void Petform(BuildContext context, String route, String name, String? variety, S
 
   final response = await http.post(
     headers: {'Content-Type': 'application/json'},
-    Uri.parse('http://10.0.2.2:3000/form$route'),
+    Uri.parse('$BASE_URL/form$route'),
     body: json.encode({
       'token': token,
       'id': id,
@@ -47,7 +48,7 @@ void userform(BuildContext context, String username, String email) async {
 
   final response = await http.post(
     headers: {'Content-Type': 'application/json'},
-    Uri.parse('http://10.0.2.2:3000/form/updateuser'),
+    Uri.parse('$BASE_URL/form/updateuser'),
     body: json.encode({
       'token': token,
       'username': username,

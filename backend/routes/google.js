@@ -5,7 +5,6 @@ const { OAuth2Client } = require('google-auth-library');
 const crypto = require('crypto');
 const { executeQuery } = require('../db');
 
-const secretKey = '80a1c66e79443f97989d40933dab1721ac66b3838c88383f23f3525b71d2ca5a3058c7addcdf';
 
 const CLIENT_IDS = [
     '458238917861-ebdk3v7bslch3u5bfo2olfh9g8vrf5cf.apps.googleusercontent.com', // Web application
@@ -61,7 +60,7 @@ router.post('/google', async (req, res) => {
             user = await createUser({ email, name: payload.name });
         }
 
-        const myJwt = jwt.sign({ id: user.id, email: user.email }, secretKey, { expiresIn: '7d' });
+        const myJwt = jwt.sign({ id: user.id, email: user.email }, 'secretKey', { expiresIn: '7d' });
 
         return res.json({
             success: true,

@@ -46,6 +46,7 @@ dependencies:
   flutter_datetime_picker_plus: ^2.2.0
   image_picker: ^1.1.2
   google_sign_in: ^6.1.0
+  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -101,6 +102,7 @@ flutter:
   # see https://flutter.dev/to/font-from-package
 
   assets:
+    - .env.client
     - assets/img/facebook.png
     - assets/img/google.png
     - assets/img/PetHospital.jpg
