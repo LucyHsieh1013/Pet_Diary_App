@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/screens/app_page/appbar/ThemeOption.dart';
-import 'package:test_app/screens/app_page/appbar/Language.dart';
+import 'package:test_app/screens/app_page/appbar/language.dart';
 import 'package:test_app/screens/app_page/appbar/password.dart';
 import 'package:test_app/services/Token.dart';
 import 'package:provider/provider.dart';

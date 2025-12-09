@@ -16,7 +16,7 @@ import 'package:test_app/screens/app_page/Diary/AddRecord.dart';
 import 'package:test_app/screens/app_page/Diary/Adddiary.dart';
 
 import 'package:test_app/screens/app_page/appbar/UserData.dart';
-import 'package:test_app/screens/app_page/Explore/Explorelist.dart';
+import 'package:test_app/screens/app_page/Explore/ExploreList.dart';
 import 'package:test_app/screens/app_page/Explore/StoreDetile.dart';
 import 'package:test_app/screens/app_page/NavController.dart';
 import 'package:test_app/screens/app_page/pet/AddPetForm.dart';

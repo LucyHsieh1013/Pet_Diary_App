@@ -3,7 +3,7 @@ import 'package:test_app/component/defaultContainer.dart';
 import 'package:test_app/component/circleImage.dart';
 import 'package:test_app/provider/PetInformation.dart';
 import 'package:provider/provider.dart';
-import 'package:test_app/screens/app_page/Pet/floatbtnFirst.dart';
+import 'package:test_app/screens/app_page/pet/floatbtnFirst.dart';
 
 class PetPage extends StatefulWidget{
   @override
